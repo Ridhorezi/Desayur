@@ -1,15 +1,15 @@
 import 'package:desayur/providers/dark_theme_provider.dart';
-import 'package:desayur/screens/home_screen.dart';
+import 'package:desayur/screens/bottom_bar.dart';
 import 'package:desayur/themes/theme_data.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatefulWidget {
-  MyApp({Key? key}) : super(key: key);
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   State<MyApp> createState() => _MyAppState();
@@ -44,7 +44,7 @@ class _MyAppState extends State<MyApp> {
             debugShowCheckedModeBanner: false,
             title: 'Flutter Demo',
             theme: Styles.themeData(themeProvider.getDarkTheme, context),
-            home: HomeScreen());
+            home: const BottomBarScreen());
       }),
     );
   }

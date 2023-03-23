@@ -2,6 +2,7 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
 class DarkThemePrefs {
+  // ignore: constant_identifier_names
   static const THEME_STATUS = "THEME_STATUS";
 
   setDarkTheme(bool value) async {
