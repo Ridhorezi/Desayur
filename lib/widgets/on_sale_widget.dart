@@ -1,6 +1,7 @@
 import 'package:desayur/services/utils.dart';
 import 'package:desayur/widgets/price_widget.dart';
 import 'package:desayur/widgets/text_widget.dart';
+import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 
@@ -15,6 +16,7 @@ class _OnSaleWidgetState extends State<OnSaleWidget> {
   @override
   Widget build(BuildContext context) {
     final Color color = Utils(context).color;
+    // ignore: unused_local_variable
     final theme = Utils(context).getTheme;
     Size size = Utils(context).getScreenSize;
 
@@ -35,11 +37,11 @@ class _OnSaleWidgetState extends State<OnSaleWidget> {
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Image.network(
-                      'https://i.ibb.co/F0s3FHQ/Apricots.png',
-                      // width: size.width * 0.22,
+                    FancyShimmerImage(
+                      imageUrl: 'https://i.ibb.co/F0s3FHQ/Apricots.png',
                       height: size.width * 0.22,
-                      fit: BoxFit.fill,
+                      width: size.width * 0.22,
+                      boxFit: BoxFit.fill,
                     ),
                     Column(
                       children: [
@@ -64,6 +66,7 @@ class _OnSaleWidgetState extends State<OnSaleWidget> {
                             ),
                             GestureDetector(
                               onTap: () {
+                                // ignore: avoid_print
                                 print('heart button is pressed');
                               },
                               child: Icon(

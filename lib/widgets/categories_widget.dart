@@ -16,10 +16,12 @@ class CategoriesWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final themeState = Provider.of<DarkThemeProvider>(context);
+    // ignore: no_leading_underscores_for_local_identifiers
     double _screenWidth = MediaQuery.of(context).size.width;
     final Color color = themeState.getDarkTheme ? Colors.white : Colors.black;
     return InkWell(
       onTap: () {
+        // ignore: avoid_print
         print('Category pressed');
       },
       child: Container(

@@ -55,6 +55,7 @@ class _UserScreenState extends State<UserScreen> {
                         ),
                         recognizer: TapGestureRecognizer()
                           ..onTap = () {
+                            // ignore: avoid_print
                             print('My name is pressed');
                           },
                       ),
@@ -229,6 +230,7 @@ class _UserScreenState extends State<UserScreen> {
         // isTitle: true,
       ),
       subtitle: TextWidget(
+        // ignore: prefer_if_null_operators
         text: subtitle == null ? "" : subtitle,
         color: color,
         textsize: 18,

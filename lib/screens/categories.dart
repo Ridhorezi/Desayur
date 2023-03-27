@@ -3,6 +3,7 @@ import 'package:desayur/widgets/categories_widget.dart';
 import 'package:desayur/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class CategoriesScreen extends StatelessWidget {
   CategoriesScreen({super.key});
 
