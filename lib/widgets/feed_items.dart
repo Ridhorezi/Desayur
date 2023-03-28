@@ -112,10 +112,12 @@ class _FeedsWidgetState extends State<FeedsWidget> {
                               onChanged: (value) {
                                 setState(() {
                                   if (value.isEmpty) {
-                                    _quantityTextController.text = '0';
+                                    _quantityTextController.text = '1';
                                     int.parse(_quantityTextController.text)
                                         .toString();
-                                  } else {}
+                                  } else {
+                                    return;
+                                  }
                                 });
                               },
                               onSaved: (value) {},

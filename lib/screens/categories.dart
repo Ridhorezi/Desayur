@@ -49,7 +49,7 @@ class CategoriesScreen extends StatelessWidget {
     Color color = utils.color;
     return Scaffold(
       appBar: AppBar(
-        elevation: 5,
+        elevation: 0,
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         title: TextWidget(
           text: 'Categories',
@@ -63,8 +63,8 @@ class CategoriesScreen extends StatelessWidget {
         child: GridView.count(
           crossAxisCount: 2,
           childAspectRatio: 240 / 250,
-          crossAxisSpacing: 30,
-          mainAxisSpacing: 30,
+          crossAxisSpacing: 10,
+          mainAxisSpacing: 10,
           // itemCount: passedColors.length,
           children: List.generate(6, (index) {
             return CategoriesWidget(

@@ -1,5 +1,5 @@
 import 'package:desayur/providers/dark_theme_provider.dart';
-import 'package:desayur/screens/cart.dart';
+import 'package:desayur/screens/cart/cart_screen.dart';
 import 'package:desayur/screens/categories.dart';
 import 'package:desayur/screens/home_screen.dart';
 import 'package:desayur/screens/user.dart';
@@ -15,7 +15,7 @@ class BottomBarScreen extends StatefulWidget {
 }
 
 class _BottomBarScreenState extends State<BottomBarScreen> {
-  int _selectedIndex = 3;
+  int _selectedIndex = 2;
   final List<Map<String, dynamic>> _pages = [
     {'page': const HomeScreen(), 'title': 'Home Screen'},
     {'page': CategoriesScreen(), 'title': 'Categories Screen'},
