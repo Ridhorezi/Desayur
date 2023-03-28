@@ -1,4 +1,5 @@
 import 'package:desayur/services/utils.dart';
+import 'package:desayur/widgets/heart_btn.dart';
 import 'package:desayur/widgets/price_widget.dart';
 import 'package:desayur/widgets/text_widget.dart';
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
@@ -64,24 +65,19 @@ class _OnSaleWidgetState extends State<OnSaleWidget> {
                                 color: color,
                               ),
                             ),
-                            GestureDetector(
-                              onTap: () {
-                                // ignore: avoid_print
-                                print('heart button is pressed');
-                              },
-                              child: Icon(
-                                IconlyLight.heart,
-                                size: 22,
-                                color: color,
-                              ),
-                            ),
+                            const HeartBtn()
                           ],
                         )
                       ],
                     )
                   ],
                 ),
-                const PriceWidget(),
+                const PriceWidget(
+                  salePrice: 5.9,
+                  price: 2.9,
+                  textPrice: '1',
+                  isOnSale: true,
+                ),
                 const SizedBox(height: 5),
                 TextWidget(
                   text: 'Product title',
