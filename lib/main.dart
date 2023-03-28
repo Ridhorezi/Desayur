@@ -1,3 +1,4 @@
+import 'package:desayur/inner_screens/on_sale_screen.dart';
 import 'package:desayur/providers/dark_theme_provider.dart';
 import 'package:desayur/screens/bottom_bar.dart';
 import 'package:desayur/themes/theme_data.dart';
@@ -41,10 +42,14 @@ class _MyAppState extends State<MyApp> {
       child:
           Consumer<DarkThemeProvider>(builder: (context, themeProvider, child) {
         return MaterialApp(
-            debugShowCheckedModeBanner: false,
-            title: 'Desayur',
-            theme: Styles.themeData(themeProvider.getDarkTheme, context),
-            home: const BottomBarScreen());
+          debugShowCheckedModeBanner: false,
+          title: 'Desayur',
+          theme: Styles.themeData(themeProvider.getDarkTheme, context),
+          home: const BottomBarScreen(),
+          routes: {
+            OnSaleScreen.routeName : (ctx) => const OnSaleScreen()
+          },
+        );
       }),
     );
   }

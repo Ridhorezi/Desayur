@@ -72,7 +72,7 @@ class _FeedsWidgetState extends State<FeedsWidget> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Flexible(
-                      flex: 4,
+                      flex: 3,
                       child: PriceWidget(
                         salePrice: 5.9,
                         price: 2.9,
@@ -98,33 +98,34 @@ class _FeedsWidgetState extends State<FeedsWidget> {
                             width: 5,
                           ),
                           Flexible(
-                              flex: 2,
-                              child: TextFormField(
-                                controller: _quantityTextController,
-                                key: const ValueKey('10'),
-                                style: TextStyle(
-                                  color: color,
-                                  fontSize: 18,
+                            flex: 2,
+                            child: TextFormField(
+                              controller: _quantityTextController,
+                              key: const ValueKey('10'),
+                              style: TextStyle(
+                                color: color,
+                                fontSize: 18,
+                              ),
+                              keyboardType: TextInputType.number,
+                              maxLines: 1,
+                              enabled: true,
+                              onChanged: (value) {
+                                setState(() {
+                                  if (value.isEmpty) {
+                                    _quantityTextController.text = '0';
+                                    int.parse(_quantityTextController.text)
+                                        .toString();
+                                  } else {}
+                                });
+                              },
+                              onSaved: (value) {},
+                              inputFormatters: [
+                                FilteringTextInputFormatter.allow(
+                                  RegExp('[0-9]'),
                                 ),
-                                keyboardType: TextInputType.number,
-                                maxLines: 1,
-                                enabled: true,
-                                onChanged: (value) {
-                                  setState(() {
-                                    if (value.isEmpty) {
-                                      _quantityTextController.text = '0';
-                                      int.parse(_quantityTextController.text)
-                                          .toString();
-                                    } else {}
-                                  });
-                                },
-                                onSaved: (value) {},
-                                inputFormatters: [
-                                  FilteringTextInputFormatter.allow(
-                                    RegExp('[0-9]'),
-                                  ),
-                                ],
-                              ))
+                              ],
+                            ),
+                          )
                         ],
                       ),
                     )

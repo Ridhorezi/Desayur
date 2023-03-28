@@ -1,4 +1,6 @@
 import 'package:card_swiper/card_swiper.dart';
+import 'package:desayur/inner_screens/on_sale_screen.dart';
+import 'package:desayur/services/global_methods.dart';
 import 'package:desayur/services/utils.dart';
 import 'package:desayur/widgets/feed_items.dart';
 import 'package:desayur/widgets/on_sale_widget.dart';
@@ -56,7 +58,10 @@ class _HomeScreenState extends State<HomeScreen> {
               height: 6,
             ),
             TextButton(
-              onPressed: () {},
+              onPressed: () {
+                GlobalMethods.navigateTo(
+                    ctx: context, routeName: OnSaleScreen.routeName);
+              },
               child: TextWidget(
                 text: "View all",
                 color: Colors.blue,
