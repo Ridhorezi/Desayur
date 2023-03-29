@@ -1,3 +1,5 @@
+import 'package:desayur/inner_screens/product_details.dart';
+import 'package:desayur/services/global_methods.dart';
 import 'package:desayur/services/utils.dart';
 import 'package:desayur/widgets/heart_btn.dart';
 import 'package:desayur/widgets/price_widget.dart';
@@ -41,7 +43,10 @@ class _FeedsWidgetState extends State<FeedsWidget> {
         borderRadius: BorderRadius.circular(12),
         color: Theme.of(context).cardColor,
         child: InkWell(
-          onTap: () {},
+          onTap: () {
+            GlobalMethods.navigateTo(
+                ctx: context, routeName: ProductDetails.routeName);
+          },
           borderRadius: BorderRadius.circular(12),
           child: Column(
             children: [
@@ -81,17 +86,20 @@ class _FeedsWidgetState extends State<FeedsWidget> {
                       ),
                     ),
                     const SizedBox(
-                      width: 8,
+                      width: 3,
                     ),
                     Flexible(
                       child: Row(
                         children: [
-                          FittedBox(
-                            child: TextWidget(
-                              text: 'KG',
-                              color: color,
-                              textsize: 10,
-                              isTitle: true,
+                          Flexible(
+                            flex: 3,
+                            child: FittedBox(
+                              child: TextWidget(
+                                text: 'KG',
+                                color: color,
+                                textsize: 18,
+                                isTitle: true,
+                              ),
                             ),
                           ),
                           const SizedBox(

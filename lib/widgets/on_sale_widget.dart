@@ -1,3 +1,5 @@
+import 'package:desayur/inner_screens/product_details.dart';
+import 'package:desayur/services/global_methods.dart';
 import 'package:desayur/services/utils.dart';
 import 'package:desayur/widgets/heart_btn.dart';
 import 'package:desayur/widgets/price_widget.dart';
@@ -28,7 +30,10 @@ class _OnSaleWidgetState extends State<OnSaleWidget> {
         borderRadius: BorderRadius.circular(12),
         child: InkWell(
           borderRadius: BorderRadius.circular(12),
-          onTap: () {},
+          onTap: () {
+             GlobalMethods.navigateTo(
+                ctx: context, routeName: ProductDetails.routeName);
+          },
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(

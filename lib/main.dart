@@ -1,5 +1,6 @@
 import 'package:desayur/inner_screens/feeds_screen.dart';
 import 'package:desayur/inner_screens/on_sale_screen.dart';
+import 'package:desayur/inner_screens/product_details.dart';
 import 'package:desayur/providers/dark_theme_provider.dart';
 import 'package:desayur/screens/bottom_bar.dart';
 import 'package:desayur/themes/theme_data.dart';
@@ -50,6 +51,7 @@ class _MyAppState extends State<MyApp> {
             routes: {
               OnSaleScreen.routeName: (ctx) => const OnSaleScreen(),
               FeedsScreen.routeName: (ctx) => const FeedsScreen(),
+              ProductDetails.routeName: (ctx) => const ProductDetails(),
             },
           );
         },

@@ -1,3 +1,5 @@
+import 'package:desayur/inner_screens/product_details.dart';
+import 'package:desayur/services/global_methods.dart';
 import 'package:desayur/services/utils.dart';
 import 'package:desayur/widgets/heart_btn.dart';
 import 'package:desayur/widgets/text_widget.dart';
@@ -38,7 +40,10 @@ class _CartWidgetState extends State<CartWidget> {
     Size size = utils.getScreenSize;
 
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        GlobalMethods.navigateTo(
+            ctx: context, routeName: ProductDetails.routeName);
+      },
       child: Row(
         children: [
           Expanded(
@@ -79,7 +84,19 @@ class _CartWidgetState extends State<CartWidget> {
                           child: Row(
                             children: [
                               _quantityController(
-                                fct: () {},
+                                fct: () {
+                                  if (_quantityTextController.text == '1') {
+                                    return;
+                                  } else {
+                                    setState(() {
+                                      _quantityTextController.text = (int.parse(
+                                                  _quantityTextController
+                                                      .text) -
+                                              1)
+                                          .toString();
+                                    });
+                                  }
+                                },
                                 color: Colors.red,
                                 icon: CupertinoIcons.minus,
                               ),
@@ -111,7 +128,14 @@ class _CartWidgetState extends State<CartWidget> {
                                 ),
                               ),
                               _quantityController(
-                                fct: () {},
+                                fct: () {
+                                  setState(() {
+                                    _quantityTextController.text = (int.parse(
+                                                _quantityTextController.text) +
+                                            1)
+                                        .toString();
+                                  });
+                                },
                                 color: Colors.green,
                                 icon: CupertinoIcons.plus,
                               ),
