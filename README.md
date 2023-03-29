@@ -1,6 +1,6 @@
 # desayur
 
-A new Flutter project.
+Tugas akhir S4 mobile programing (Desayur - Grocery App)
 
 ## Getting Started
 
