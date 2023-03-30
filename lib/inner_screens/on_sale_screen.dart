@@ -10,7 +10,8 @@ class OnSaleScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool isEmpty = false;
+    // ignore: no_leading_underscores_for_local_identifiers
+    bool _isEmpty = false;
 
     final Utils utils = Utils(context);
     // ignore: unused_local_variable
@@ -32,7 +33,7 @@ class OnSaleScreen extends StatelessWidget {
           isTitle: true,
         ),
       ),
-      body: isEmpty
+      body: _isEmpty == true
           // ignore: dead_code
           ? Center(
               child: Padding(

@@ -1,4 +1,5 @@
 import 'package:desayur/screens/cart/cart_widget.dart';
+import 'package:desayur/widgets/empty_screen.dart';
 import 'package:desayur/services/global_methods.dart';
 import 'package:desayur/services/utils.dart';
 import 'package:desayur/widgets/text_widget.dart';
@@ -15,47 +16,57 @@ class CartScreen extends StatelessWidget {
     final Color color = Utils(context).color;
     // ignore: unused_local_variable
     Size size = utils.getScreenSize;
+    // ignore: no_leading_underscores_for_local_identifiers
+    bool _isEmpty = true;
 
-    return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        title: TextWidget(
-          text: 'Cart (2)',
-          color: color,
-          textsize: 22,
-          isTitle: true,
-        ),
-        actions: [
-          IconButton(
-            onPressed: () {
-              GlobalMethods.warningDialog(
-                  title: 'Empty your cart?',
-                  subtitle: 'Are you sure?',
-                  fct: () {},
-                  context: context);
-            },
-            icon: Icon(
-              IconlyBroken.delete,
-              color: color,
+    return _isEmpty
+        ? const EmptyScreen(
+            title: 'Your cart is empty',
+            subtitle: 'Add something and make me happy :)',
+            buttonText: 'Shope now',
+            imagePath: 'assets/images/cart.png',
+          )
+        // ignore: dead_code
+        : Scaffold(
+            appBar: AppBar(
+              elevation: 0,
+              backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+              title: TextWidget(
+                text: 'Cart (2)',
+                color: color,
+                textsize: 22,
+                isTitle: true,
+              ),
+              actions: [
+                IconButton(
+                  onPressed: () {
+                    GlobalMethods.warningDialog(
+                        title: 'Empty your cart?',
+                        subtitle: 'Are you sure?',
+                        fct: () {},
+                        context: context);
+                  },
+                  icon: Icon(
+                    IconlyBroken.delete,
+                    color: color,
+                  ),
+                ),
+              ],
             ),
-          ),
-        ],
-      ),
-      body: Column(
-        children: [
-          _checkout(ctx: context),
-          Expanded(
-            child: ListView.builder(
-              itemCount: 10,
-              itemBuilder: (ctx, index) {
-                return const CartWidget();
-              },
+            body: Column(
+              children: [
+                _checkout(ctx: context),
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: 10,
+                    itemBuilder: (ctx, index) {
+                      return const CartWidget();
+                    },
+                  ),
+                ),
+              ],
             ),
-          ),
-        ],
-      ),
-    );
+          );
   }
 
   Widget _checkout({required BuildContext ctx}) {

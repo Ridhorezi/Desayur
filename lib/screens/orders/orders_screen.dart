@@ -1,3 +1,4 @@
+import 'package:desayur/widgets/empty_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:desayur/widgets/back_widget.dart';
 import 'package:desayur/services/utils.dart';
@@ -18,35 +19,44 @@ class _OrdersScreenState extends State<OrdersScreen> {
   Widget build(BuildContext context) {
     final Color color = Utils(context).color;
     // Size size = Utils(context).getScreenSize;
-    return Scaffold(
-      appBar: AppBar(
-        leading: const BackWidget(),
-        elevation: 0,
-        centerTitle: false,
-        title: TextWidget(
-          text: 'Your orders (2)',
-          color: color,
-          textsize: 24,
-          isTitle: true,
-        ),
-        backgroundColor:
-            Theme.of(context).scaffoldBackgroundColor.withOpacity(0.9),
-      ),
-      body: ListView.separated(
-        itemCount: 10,
-        itemBuilder: (ctx, index) {
-          return const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 2, vertical: 6),
-            child: OrderWidget(),
+    // ignore: no_leading_underscores_for_local_identifiers
+    bool _isEmpty = true;
+
+    return _isEmpty == true
+        ? const EmptyScreen(
+            imagePath: 'assets/images/cart.png',
+            title: 'You didnt place any order yet',
+            subtitle: 'Order something and make me happy :)',
+            buttonText: 'Shope now')
+        : Scaffold(
+            appBar: AppBar(
+              leading: const BackWidget(),
+              elevation: 0,
+              centerTitle: false,
+              title: TextWidget(
+                text: 'Your orders (2)',
+                color: color,
+                textsize: 24,
+                isTitle: true,
+              ),
+              backgroundColor:
+                  Theme.of(context).scaffoldBackgroundColor.withOpacity(0.9),
+            ),
+            body: ListView.separated(
+              itemCount: 10,
+              itemBuilder: (ctx, index) {
+                return const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 2, vertical: 6),
+                  child: OrderWidget(),
+                );
+              },
+              separatorBuilder: (BuildContext context, int index) {
+                return Divider(
+                  color: color,
+                  thickness: 1,
+                );
+              },
+            ),
           );
-        },
-        separatorBuilder: (BuildContext context, int index) {
-          return Divider(
-            color: color,
-            thickness: 1,
-          );
-        },
-      ),
-    );
   }
 }
