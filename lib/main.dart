@@ -3,6 +3,7 @@ import 'package:desayur/inner_screens/on_sale_screen.dart';
 import 'package:desayur/inner_screens/product_details.dart';
 import 'package:desayur/providers/dark_theme_provider.dart';
 import 'package:desayur/screens/bottom_bar.dart';
+import 'package:desayur/screens/orders/orders_screen.dart';
 import 'package:desayur/screens/wishlist/wishlist_screen.dart';
 import 'package:desayur/themes/theme_data.dart';
 import 'package:flutter/material.dart';
@@ -54,6 +55,7 @@ class _MyAppState extends State<MyApp> {
               FeedsScreen.routeName: (ctx) => const FeedsScreen(),
               ProductDetails.routeName: (ctx) => const ProductDetails(),
               WishlistScreen.routeName: (ctx) => const WishlistScreen(),
+              OrdersScreen.routeName: (ctx) => const OrdersScreen(),
             },
           );
         },

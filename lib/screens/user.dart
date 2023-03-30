@@ -1,4 +1,5 @@
 import 'package:desayur/providers/dark_theme_provider.dart';
+import 'package:desayur/screens/orders/orders_screen.dart';
 import 'package:desayur/screens/wishlist/wishlist_screen.dart';
 import 'package:desayur/services/global_methods.dart';
 import 'package:desayur/widgets/text_widget.dart';
@@ -94,7 +95,10 @@ class _UserScreenState extends State<UserScreen> {
                 _listTiles(
                   title: 'Orders',
                   icon: IconlyLight.bag,
-                  onPressed: () {},
+                  onPressed: () {
+                    GlobalMethods.navigateTo(
+                        ctx: context, routeName: OrdersScreen.routeName);
+                  },
                   color: color,
                 ),
                 _listTiles(
