@@ -1,4 +1,5 @@
 import 'package:desayur/screens/wishlist/wishlist_widget.dart';
+import 'package:desayur/services/global_methods.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:desayur/services/utils.dart';
 import 'package:desayur/widgets/back_widget.dart';
@@ -33,7 +34,13 @@ class WishlistScreen extends StatelessWidget {
         ),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              GlobalMethods.warningDialog(
+                  title: 'Empty your wishlist?',
+                  subtitle: 'Are you sure?',
+                  fct: () {},
+                  context: context);
+            },
             icon: Icon(
               IconlyBroken.delete,
               color: color,

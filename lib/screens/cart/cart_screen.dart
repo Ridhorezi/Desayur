@@ -1,4 +1,5 @@
 import 'package:desayur/screens/cart/cart_widget.dart';
+import 'package:desayur/services/global_methods.dart';
 import 'package:desayur/services/utils.dart';
 import 'package:desayur/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +28,13 @@ class CartScreen extends StatelessWidget {
         ),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              GlobalMethods.warningDialog(
+                  title: 'Empty your cart?',
+                  subtitle: 'Are you sure?',
+                  fct: () {},
+                  context: context);
+            },
             icon: Icon(
               IconlyBroken.delete,
               color: color,
