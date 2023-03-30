@@ -1,8 +1,8 @@
 import 'package:desayur/services/utils.dart';
+import 'package:desayur/widgets/back_widget.dart';
 import 'package:desayur/widgets/feed_items.dart';
 import 'package:desayur/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_iconly/flutter_iconly.dart';
 
 class FeedsScreen extends StatefulWidget {
   static const routeName = "/FeedsScreenState";
@@ -36,16 +36,7 @@ class _FeedsScreenState extends State<FeedsScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        leading: InkWell(
-          borderRadius: BorderRadius.circular(12),
-          onTap: () {
-            Navigator.pop(context);
-          },
-          child: Icon(
-            IconlyLight.arrowLeft2,
-            color: color,
-          ),
-        ),
+        leading: const BackWidget(),
         elevation: 0,
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         centerTitle: true,
