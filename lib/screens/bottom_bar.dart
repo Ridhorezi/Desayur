@@ -3,7 +3,9 @@ import 'package:desayur/screens/cart/cart_screen.dart';
 import 'package:desayur/screens/categories.dart';
 import 'package:desayur/screens/home_screen.dart';
 import 'package:desayur/screens/user.dart';
+import 'package:desayur/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:badges/badges.dart' as badges;
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:provider/provider.dart';
 
@@ -61,7 +63,20 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
             label: "Categories",
           ),
           BottomNavigationBarItem(
-            icon: Icon(_selectedIndex == 2 ? IconlyBold.buy : IconlyLight.buy),
+            icon: badges.Badge(
+              badgeAnimation: const badges.BadgeAnimation.slide(),
+              badgeStyle: badges.BadgeStyle(
+                shape: badges.BadgeShape.circle,
+                badgeColor: Colors.blue,
+                borderRadius: BorderRadius.circular(8),
+              ),
+              position: badges.BadgePosition.topEnd(top: -10, end: -9),
+              badgeContent: FittedBox(
+                  child:
+                      TextWidget(text: '1', color: Colors.white, textsize: 14)),
+              child:
+                  Icon(_selectedIndex == 2 ? IconlyBold.buy : IconlyLight.buy),
+            ),
             label: "Cart",
           ),
           BottomNavigationBarItem(
