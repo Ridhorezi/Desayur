@@ -1,5 +1,8 @@
 import 'package:card_swiper/card_swiper.dart';
 import 'package:desayur/consts/consts.dart';
+import 'package:desayur/screens/auth/forget_pass.dart';
+import 'package:desayur/screens/auth/register.dart';
+import 'package:desayur/services/global_methods.dart';
 import 'package:desayur/widgets/auth_button.dart';
 import 'package:desayur/widgets/google_button.dart';
 import 'package:desayur/widgets/text_widget.dart';
@@ -7,6 +10,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatefulWidget {
+  static const routeName = '/LoginScreen';
   const LoginScreen({super.key});
 
   @override
@@ -168,7 +172,11 @@ class _LoginScreenState extends State<LoginScreen> {
                   Align(
                     alignment: Alignment.topRight,
                     child: TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        GlobalMethods.navigateTo(
+                            ctx: context,
+                            routeName: ForgetPasswordScreen.routeName);
+                      },
                       child: const Text(
                         'Forgot password?',
                         maxLines: 1,
@@ -185,7 +193,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     height: 10,
                   ),
                   AuthButton(
-                    fct: () {},
+                    fct: _submitFormOnLogin,
                     buttonText: 'Login',
                   ),
                   const SizedBox(
@@ -245,7 +253,13 @@ class _LoginScreenState extends State<LoginScreen> {
                             fontSize: 18,
                             fontWeight: FontWeight.w600,
                           ),
-                          recognizer: TapGestureRecognizer()..onTap = () {},
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () {
+                              GlobalMethods.navigateTo(
+                                ctx: context,
+                                routeName: RegisterScreen.routeName,
+                              );
+                            },
                         ),
                       ],
                     ),

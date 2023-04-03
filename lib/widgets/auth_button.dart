@@ -17,6 +17,7 @@ class AuthButton extends StatelessWidget {
       width: double.infinity,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
+          // ignore: deprecated_member_use
           primary: primary,
         ),
         onPressed: () {},
