@@ -35,6 +35,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
     List<ProductModel> allProducts = productsProviders.getProducts;
 
+    List<ProductModel> productOnSale = productsProviders.getOnSaleProducts;
+
     final Utils utils = Utils(context);
     // ignore: unused_local_variable
     final themeState = utils.getTheme;
@@ -108,10 +110,14 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: SizedBox(
                     height: size.height * 0.24,
                     child: ListView.builder(
-                      itemCount: 10,
+                      itemCount:
+                          productOnSale.length < 5 ? productOnSale.length : 5,
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (ctx, index) {
-                        return const OnSaleWidget();
+                        return ChangeNotifierProvider.value(
+                          value: productOnSale[index],
+                          child: const OnSaleWidget(),
+                        );
                       },
                     ),
                   ),

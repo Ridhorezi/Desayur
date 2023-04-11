@@ -11,8 +11,9 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 class FeedsWidget extends StatefulWidget {
-  
-  const FeedsWidget({super.key,});
+  const FeedsWidget({
+    super.key,
+  });
 
   @override
   State<FeedsWidget> createState() => _FeedsWidgetState();
@@ -41,7 +42,7 @@ class _FeedsWidgetState extends State<FeedsWidget> {
     // ignore: unused_local_variable
     final theme = Utils(context).getTheme;
     Size size = Utils(context).getScreenSize;
-  
+
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Material(
@@ -91,25 +92,22 @@ class _FeedsWidgetState extends State<FeedsWidget> {
                     Flexible(
                       flex: 3,
                       child: PriceWidget(
-                        salePrice: 5.9,
-                        price: 2.9,
+                        salePrice: productModel.salePrice,
+                        price: productModel.price,
                         textPrice: _quantityTextController.text,
                         isOnSale: true,
                       ),
-                    ),
-                    const SizedBox(
-                      width: 3,
                     ),
                     Flexible(
                       child: Row(
                         children: [
                           Flexible(
-                            flex: 3,
+                            flex: 6,
                             child: FittedBox(
                               child: TextWidget(
-                                text: 'KG',
+                                text: productModel.isPiece ? 'Piece' : 'Kg',
                                 color: color,
-                                textsize: 18,
+                                textsize: 20,
                                 isTitle: true,
                               ),
                             ),

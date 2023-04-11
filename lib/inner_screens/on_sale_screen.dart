@@ -1,8 +1,11 @@
+import 'package:desayur/models/products_model.dart';
+import 'package:desayur/providers/products_providers.dart';
 import 'package:desayur/services/utils.dart';
 import 'package:desayur/widgets/back_widget.dart';
 import 'package:desayur/widgets/on_sale_widget.dart';
 import 'package:desayur/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class OnSaleScreen extends StatelessWidget {
   static const routeName = "/onSaleScreen";
@@ -10,8 +13,9 @@ class OnSaleScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // ignore: no_leading_underscores_for_local_identifiers
-    bool _isEmpty = false;
+    final productsProviders = Provider.of<ProductsProvider>(context);
+
+    List<ProductModel> productOnSale = productsProviders.getOnSaleProducts;
 
     final Utils utils = Utils(context);
     // ignore: unused_local_variable
@@ -33,7 +37,7 @@ class OnSaleScreen extends StatelessWidget {
           isTitle: true,
         ),
       ),
-      body: _isEmpty == true
+      body: productOnSale.isEmpty
           // ignore: dead_code
           ? Center(
               child: Padding(
@@ -50,9 +54,10 @@ class OnSaleScreen extends StatelessWidget {
                       'No products on sale yet!,\nStay tuned',
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                          color: color,
-                          fontSize: 30,
-                          fontWeight: FontWeight.w700),
+                        color: color,
+                        fontSize: 30,
+                        fontWeight: FontWeight.w700,
+                      ),
                     ),
                   ],
                 ),
@@ -65,9 +70,12 @@ class OnSaleScreen extends StatelessWidget {
               // crossAxisSpacing: 10,
               childAspectRatio: size.width / (size.height * 0.45),
               children: List.generate(
-                16,
+                productOnSale.length,
                 (index) {
-                  return const OnSaleWidget();
+                  return ChangeNotifierProvider.value(
+                    value: productOnSale[index],
+                    child: const OnSaleWidget(),
+                  );
                 },
               ),
             ),

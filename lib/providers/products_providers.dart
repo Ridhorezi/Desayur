@@ -6,6 +6,10 @@ class ProductsProvider with ChangeNotifier {
     return _productsList;
   }
 
+  List<ProductModel> get getOnSaleProducts {
+    return _productsList.where((element) => element.isOnSale).toList();
+  }
+
   static final List<ProductModel> _productsList = [
     ProductModel(
       id: 'Apricots',
@@ -14,8 +18,8 @@ class ProductsProvider with ChangeNotifier {
       productCategoryName: 'Fruits',
       price: 0.99,
       salePrice: 0.35,
-      isOnSale: false,
-      isPiece: true,
+      isOnSale: true,
+      isPiece: false,
     ),
     ProductModel(
       id: 'Green grape',
@@ -24,8 +28,8 @@ class ProductsProvider with ChangeNotifier {
       productCategoryName: 'Fruits',
       price: 0.99,
       salePrice: 0.4,
-      isOnSale: false,
-      isPiece: true,
+      isOnSale: true,
+      isPiece: false,
     ),
     ProductModel(
       id: 'Kangkong',
@@ -34,8 +38,8 @@ class ProductsProvider with ChangeNotifier {
       productCategoryName: 'Herbs',
       price: 0.99,
       salePrice: 0.5,
-      isOnSale: false,
-      isPiece: true,
+      isOnSale: true,
+      isPiece: false,
     ),
     ProductModel(
       id: 'Leek',
@@ -74,7 +78,7 @@ class ProductsProvider with ChangeNotifier {
       productCategoryName: 'Grains',
       price: 0.99,
       salePrice: 0.35,
-      isOnSale: false,
+      isOnSale: true,
       isPiece: true,
     ),
     ProductModel(
@@ -85,7 +89,7 @@ class ProductsProvider with ChangeNotifier {
       price: 0.29,
       salePrice: 0.19,
       isOnSale: false,
-      isPiece: true,
+      isPiece: false,
     ),
     ProductModel(
       id: 'Almond',
@@ -95,7 +99,7 @@ class ProductsProvider with ChangeNotifier {
       price: 0.29,
       salePrice: 0.19,
       isOnSale: false,
-      isPiece: true,
+      isPiece: false,
     ),
     ProductModel(
       id: 'Chinese-cabbage-wombok',
@@ -104,7 +108,7 @@ class ProductsProvider with ChangeNotifier {
       productCategoryName: 'Spices',
       price: 0.99,
       salePrice: 0.15,
-      isOnSale: false,
+      isOnSale: true,
       isPiece: true,
     ),
   ];
