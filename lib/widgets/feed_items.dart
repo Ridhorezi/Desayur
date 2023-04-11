@@ -9,7 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class FeedsWidget extends StatefulWidget {
-  const FeedsWidget({super.key});
+  final String imageUrl, title;
+  const FeedsWidget({super.key, required this.imageUrl, required this.title});
 
   @override
   State<FeedsWidget> createState() => _FeedsWidgetState();
@@ -51,7 +52,7 @@ class _FeedsWidgetState extends State<FeedsWidget> {
           child: Column(
             children: [
               FancyShimmerImage(
-                imageUrl: 'https://i.ibb.co/F0s3FHQ/Apricots.png',
+                imageUrl: widget.imageUrl,
                 height: size.width * 0.21,
                 width: size.width * 0.2,
                 boxFit: BoxFit.fill,
@@ -61,13 +62,20 @@ class _FeedsWidgetState extends State<FeedsWidget> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    TextWidget(
-                      text: 'Title',
-                      color: color,
-                      textsize: 20,
-                      isTitle: true,
+                    Flexible(
+                      flex: 3,
+                      child: TextWidget(
+                        text: widget.title,
+                        color: color,
+                        maxLines: 1,
+                        textsize: 18,
+                        isTitle: true,
+                      ),
                     ),
-                    const HeartBtn()
+                    const Flexible(
+                      flex: 1,
+                      child: HeartBtn(),
+                    ),
                   ],
                 ),
               ),

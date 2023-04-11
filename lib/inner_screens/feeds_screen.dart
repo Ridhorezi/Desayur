@@ -1,3 +1,4 @@
+import 'package:desayur/consts/consts.dart';
 import 'package:desayur/services/utils.dart';
 import 'package:desayur/widgets/back_widget.dart';
 import 'package:desayur/widgets/feed_items.dart';
@@ -95,8 +96,11 @@ class _FeedsScreenState extends State<FeedsScreen> {
               padding: EdgeInsets.zero,
               // crossAxisSpacing: 10,
               childAspectRatio: size.width / (size.height * 0.59),
-              children: List.generate(10, (index) {
-                return const FeedsWidget();
+              children: List.generate(Consts.productsList.length, (index) {
+                return FeedsWidget(
+                  imageUrl: Consts.productsList[index].imageUrl,
+                  title: Consts.productsList[index].title,
+                );
               }),
             ),
           ],
