@@ -1,4 +1,4 @@
-import 'package:desayur/providers/dark_theme_provider.dart';
+import 'package:desayur/provider/dark_theme_provider.dart';
 import 'package:desayur/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

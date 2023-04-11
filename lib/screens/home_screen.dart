@@ -2,6 +2,8 @@ import 'package:card_swiper/card_swiper.dart';
 import 'package:desayur/consts/consts.dart';
 import 'package:desayur/inner_screens/feeds_screen.dart';
 import 'package:desayur/inner_screens/on_sale_screen.dart';
+import 'package:desayur/models/products_model.dart';
+import 'package:desayur/providers/products_providers.dart';
 import 'package:desayur/services/global_methods.dart';
 import 'package:desayur/services/utils.dart';
 import 'package:desayur/widgets/feed_items.dart';
@@ -9,6 +11,7 @@ import 'package:desayur/widgets/on_sale_widget.dart';
 import 'package:desayur/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -28,6 +31,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final productsProviders = Provider.of<ProductsProvider>(context);
+
+    List<ProductModel> allProducts = productsProviders.getProducts;
+
     final Utils utils = Utils(context);
     // ignore: unused_local_variable
     final themeState = utils.getTheme;
@@ -149,14 +156,16 @@ class _HomeScreenState extends State<HomeScreen> {
               // crossAxisSpacing: 10,
               childAspectRatio: size.width / (size.height * 0.59),
               children: List.generate(
-                  Consts.productsList.length < 4
-                      ? Consts.productsList.length //! length 3
-                      : 4, (index) {
-                return FeedsWidget(
-                  imageUrl: Consts.productsList[index].imageUrl,
-                  title: Consts.productsList[index].title,
-                );
-              }),
+                allProducts.length < 4
+                    ? allProducts.length //! length 3
+                    : 4,
+                (index) {
+                  return ChangeNotifierProvider.value(
+                    value: allProducts[index],
+                    child: const FeedsWidget(),
+                  );
+                },
+              ),
             ),
           ],
         ),

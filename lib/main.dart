@@ -1,7 +1,8 @@
 import 'package:desayur/inner_screens/feeds_screen.dart';
 import 'package:desayur/inner_screens/on_sale_screen.dart';
 import 'package:desayur/inner_screens/product_details.dart';
-import 'package:desayur/providers/dark_theme_provider.dart';
+import 'package:desayur/provider/dark_theme_provider.dart';
+import 'package:desayur/providers/products_providers.dart';
 import 'package:desayur/screens/auth/forget_pass.dart';
 import 'package:desayur/screens/auth/login.dart';
 import 'package:desayur/screens/auth/register.dart';
@@ -45,7 +46,10 @@ class _MyAppState extends State<MyApp> {
       providers: [
         ChangeNotifierProvider(create: (_) {
           return themeChangeProvider;
-        })
+        }),
+        ChangeNotifierProvider(
+          create: (_) => ProductsProvider(),
+        ),
       ],
       child: Consumer<DarkThemeProvider>(
         builder: (context, themeProvider, child) {
@@ -59,8 +63,9 @@ class _MyAppState extends State<MyApp> {
               //! Auth route
               LoginScreen.routeName: (ctx) => const LoginScreen(),
               RegisterScreen.routeName: (ctx) => const RegisterScreen(),
-              ForgetPasswordScreen.routeName : (ctx) => const ForgetPasswordScreen(),
-               //! Content route
+              ForgetPasswordScreen.routeName: (ctx) =>
+                  const ForgetPasswordScreen(),
+              //! Content route
               OnSaleScreen.routeName: (ctx) => const OnSaleScreen(),
               FeedsScreen.routeName: (ctx) => const FeedsScreen(),
               ProductDetails.routeName: (ctx) => const ProductDetails(),

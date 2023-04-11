@@ -1,4 +1,4 @@
-import 'package:desayur/providers/dark_theme_provider.dart';
+import 'package:desayur/provider/dark_theme_provider.dart';
 import 'package:desayur/screens/cart/cart_screen.dart';
 import 'package:desayur/screens/categories.dart';
 import 'package:desayur/screens/home_screen.dart';

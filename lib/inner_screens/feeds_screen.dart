@@ -1,9 +1,11 @@
-import 'package:desayur/consts/consts.dart';
+import 'package:desayur/models/products_model.dart';
+import 'package:desayur/providers/products_providers.dart';
 import 'package:desayur/services/utils.dart';
 import 'package:desayur/widgets/back_widget.dart';
 import 'package:desayur/widgets/feed_items.dart';
 import 'package:desayur/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class FeedsScreen extends StatefulWidget {
   static const routeName = "/FeedsScreenState";
@@ -27,6 +29,10 @@ class _FeedsScreenState extends State<FeedsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final productsProviders = Provider.of<ProductsProvider>(context);
+
+    List<ProductModel> allProducts = productsProviders.getProducts;
+
     final Utils utils = Utils(context);
     // ignore: unused_local_variable
     final themeState = utils.getTheme;
@@ -96,12 +102,15 @@ class _FeedsScreenState extends State<FeedsScreen> {
               padding: EdgeInsets.zero,
               // crossAxisSpacing: 10,
               childAspectRatio: size.width / (size.height * 0.59),
-              children: List.generate(Consts.productsList.length, (index) {
-                return FeedsWidget(
-                  imageUrl: Consts.productsList[index].imageUrl,
-                  title: Consts.productsList[index].title,
-                );
-              }),
+              children: List.generate(
+                allProducts.length,
+                (index) {
+                  return ChangeNotifierProvider.value(
+                    value: allProducts[index],
+                    child: const FeedsWidget(),
+                  );
+                },
+              ),
             ),
           ],
         ),
