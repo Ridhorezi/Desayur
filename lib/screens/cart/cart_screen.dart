@@ -17,9 +17,10 @@ class CartScreen extends StatelessWidget {
     // ignore: unused_local_variable
     Size size = utils.getScreenSize;
     // ignore: no_leading_underscores_for_local_identifiers
-    bool _isEmpty = true;
+    bool _isEmpty = false;
 
     return _isEmpty
+        // ignore: dead_code
         ? const EmptyScreen(
             title: 'Your cart is empty',
             subtitle: 'Add something and make me happy :)',
