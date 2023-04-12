@@ -1,5 +1,5 @@
 import 'package:desayur/models/products_model.dart';
-import 'package:desayur/providers/products_providers.dart';
+import 'package:desayur/providers/products_provider.dart';
 import 'package:desayur/services/utils.dart';
 import 'package:desayur/widgets/back_widget.dart';
 import 'package:desayur/widgets/empty_products_widget.dart';

@@ -1,4 +1,4 @@
-import 'package:desayur/providers/products_providers.dart';
+import 'package:desayur/providers/products_provider.dart';
 import 'package:desayur/services/utils.dart';
 import 'package:desayur/widgets/text_widget.dart';
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';

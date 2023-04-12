@@ -3,7 +3,8 @@ import 'package:desayur/inner_screens/feeds_screen.dart';
 import 'package:desayur/inner_screens/on_sale_screen.dart';
 import 'package:desayur/inner_screens/product_details.dart';
 import 'package:desayur/provider/dark_theme_provider.dart';
-import 'package:desayur/providers/products_providers.dart';
+import 'package:desayur/providers/cart_provider.dart';
+import 'package:desayur/providers/products_provider.dart';
 import 'package:desayur/screens/auth/forget_pass.dart';
 import 'package:desayur/screens/auth/login.dart';
 import 'package:desayur/screens/auth/register.dart';
@@ -50,6 +51,9 @@ class _MyAppState extends State<MyApp> {
         }),
         ChangeNotifierProvider(
           create: (_) => ProductsProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => CartProvider(),
         ),
       ],
       child: Consumer<DarkThemeProvider>(

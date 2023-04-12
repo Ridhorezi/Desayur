@@ -3,7 +3,7 @@ import 'package:desayur/consts/consts.dart';
 import 'package:desayur/inner_screens/feeds_screen.dart';
 import 'package:desayur/inner_screens/on_sale_screen.dart';
 import 'package:desayur/models/products_model.dart';
-import 'package:desayur/providers/products_providers.dart';
+import 'package:desayur/providers/products_provider.dart';
 import 'package:desayur/services/global_methods.dart';
 import 'package:desayur/services/utils.dart';
 import 'package:desayur/widgets/feed_items.dart';
