@@ -17,7 +17,9 @@ class _OrderWidgetState extends State<OrderWidget> {
   @override
   Widget build(BuildContext context) {
     final Color color = Utils(context).color;
+
     Size size = Utils(context).getScreenSize;
+
     return ListTile(
       subtitle: const Text('Paid: \$12.8'),
       onTap: () {

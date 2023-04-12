@@ -14,6 +14,7 @@ import '../../widgets/text_widget.dart';
 
 class RegisterScreen extends StatefulWidget {
   static const routeName = '/RegisterScreen';
+
   const RegisterScreen({Key? key}) : super(key: key);
 
   @override
@@ -24,13 +25,21 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final _formKey = GlobalKey<FormState>();
 
   final _fullNameController = TextEditingController();
+
   final _emailTextController = TextEditingController();
+
   final _passTextController = TextEditingController();
+
   final _addressTextController = TextEditingController();
+
   final _passFocusNode = FocusNode();
+
   final _emailFocusNode = FocusNode();
+
   final _addressFocusNode = FocusNode();
+
   bool _obscureText = true;
+
   @override
   void dispose() {
     _fullNameController.dispose();
@@ -45,6 +54,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   void _submitFormOnRegister() async {
     final isValid = _formKey.currentState!.validate();
+
     FocusScope.of(context).unfocus();
 
     if (isValid) {

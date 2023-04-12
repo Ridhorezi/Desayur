@@ -12,7 +12,7 @@ class BackWidget extends StatelessWidget {
     final themeState = utils.getTheme;
     // ignore: unused_local_variable
     final Color color = Utils(context).color;
-    
+
     return InkWell(
       borderRadius: BorderRadius.circular(12),
       onTap: () {

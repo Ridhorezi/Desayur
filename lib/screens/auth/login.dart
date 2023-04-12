@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 
 class LoginScreen extends StatefulWidget {
   static const routeName = '/LoginScreen';
+
   const LoginScreen({super.key});
 
   @override
@@ -19,9 +20,13 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final _emailTextController = TextEditingController();
+
   final _passTextController = TextEditingController();
+
   final _passFocusNode = FocusNode();
+
   final _formKey = GlobalKey<FormState>();
+
   var _obscureText = true;
 
   @override
@@ -36,7 +41,9 @@ class _LoginScreenState extends State<LoginScreen> {
   void _submitFormOnLogin() {
     // ignore: no_leading_underscores_for_local_identifiers
     final _isValid = _formKey.currentState!.validate();
+
     FocusScope.of(context).unfocus();
+
     if (_isValid) {
       // ignore: avoid_print
       print('The form is valid');

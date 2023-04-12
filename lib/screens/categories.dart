@@ -46,7 +46,9 @@ class CategoriesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final utils = Utils(context);
+
     Color color = utils.color;
+
     return Scaffold(
       appBar: AppBar(
         elevation: 0,

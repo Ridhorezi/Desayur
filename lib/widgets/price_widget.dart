@@ -17,6 +17,7 @@ class PriceWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Color color = Utils(context).color;
+
     return FittedBox(
       child: Row(
         children: [

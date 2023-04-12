@@ -40,7 +40,9 @@ class _HomeScreenState extends State<HomeScreen> {
     final Utils utils = Utils(context);
     // ignore: unused_local_variable
     final themeState = utils.getTheme;
+
     final Color color = Utils(context).color;
+
     Size size = utils.getScreenSize;
 
     return Scaffold(

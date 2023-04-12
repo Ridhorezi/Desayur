@@ -9,6 +9,7 @@ import 'package:desayur/widgets/text_widget.dart';
 
 class ForgetPasswordScreen extends StatefulWidget {
   static const routeName = '/ForgetPasswordScreen';
+
   const ForgetPasswordScreen({Key? key}) : super(key: key);
 
   @override
@@ -18,6 +19,7 @@ class ForgetPasswordScreen extends StatefulWidget {
 
 class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
   final _emailTextController = TextEditingController();
+
   // bool _isLoading = false;
   @override
   void dispose() {
@@ -31,6 +33,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
   @override
   Widget build(BuildContext context) {
     Size size = Utils(context).getScreenSize;
+
     return Scaffold(
       // backgroundColor: Colors.blue,
       body: Stack(

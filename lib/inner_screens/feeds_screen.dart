@@ -18,6 +18,7 @@ class FeedsScreen extends StatefulWidget {
 class _FeedsScreenState extends State<FeedsScreen> {
   // ignore: unnecessary_nullable_for_final_variable_declarations
   final TextEditingController? _searchTextController = TextEditingController();
+
   final FocusNode _searchTextFocusNode = FocusNode();
 
   @override

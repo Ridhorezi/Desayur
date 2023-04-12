@@ -37,6 +37,7 @@ class _CartWidgetState extends State<CartWidget> {
     final themeState = utils.getTheme;
     // ignore: unused_local_variable
     final Color color = Utils(context).color;
+
     Size size = utils.getScreenSize;
 
     return GestureDetector(

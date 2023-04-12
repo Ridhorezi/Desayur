@@ -21,10 +21,11 @@ class TextWidget extends StatelessWidget {
     return Text(
       text,
       style: TextStyle(
-          overflow: TextOverflow.ellipsis,
-          color: color,
-          fontSize: textsize,
-          fontWeight: isTitle ? FontWeight.bold : FontWeight.normal),
+        overflow: TextOverflow.ellipsis,
+        color: color,
+        fontSize: textsize,
+        fontWeight: isTitle ? FontWeight.bold : FontWeight.normal,
+      ),
     );
   }
 }

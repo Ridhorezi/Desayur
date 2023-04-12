@@ -28,7 +28,9 @@ class _UserScreenState extends State<UserScreen> {
   @override
   Widget build(BuildContext context) {
     final themeState = Provider.of<DarkThemeProvider>(context);
+
     final Color color = themeState.getDarkTheme ? Colors.white : Colors.black;
+
     return Scaffold(
       body: Center(
         child: SingleChildScrollView(
@@ -115,8 +117,9 @@ class _UserScreenState extends State<UserScreen> {
                   title: 'Viewed',
                   icon: IconlyLight.show,
                   onPressed: () {
-                     GlobalMethods.navigateTo(
-                        ctx: context, routeName: ViewedRecentlyScreen.routeName);
+                    GlobalMethods.navigateTo(
+                        ctx: context,
+                        routeName: ViewedRecentlyScreen.routeName);
                   },
                   color: color,
                 ),

@@ -18,6 +18,7 @@ class _ViewedRecentlyWidgetState extends State<ViewedRecentlyWidget> {
   @override
   Widget build(BuildContext context) {
     Color color = Utils(context).color;
+
     Size size = Utils(context).getScreenSize;
 
     return Padding(

@@ -8,6 +8,7 @@ class HeartBtn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Color color = Utils(context).color;
+
     return GestureDetector(
       onTap: () {
         // ignore: avoid_print

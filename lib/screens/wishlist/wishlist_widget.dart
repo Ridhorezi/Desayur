@@ -17,6 +17,7 @@ class WishlistWidget extends StatelessWidget {
     final Color color = Utils(context).color;
     // ignore: unused_local_variable
     Size size = utils.getScreenSize;
+
     return Padding(
       padding: const EdgeInsets.all(4.0),
       child: GestureDetector(

@@ -1,3 +1,4 @@
+import 'package:desayur/providers/products_providers.dart';
 import 'package:desayur/services/utils.dart';
 import 'package:desayur/widgets/text_widget.dart';
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
@@ -6,6 +7,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:desayur/widgets/heart_btn.dart';
+import 'package:provider/provider.dart';
 
 class ProductDetails extends StatefulWidget {
   static const routeName = '/ProductDetails';
@@ -28,8 +30,21 @@ class _ProductDetailsState extends State<ProductDetails> {
 
   @override
   Widget build(BuildContext context) {
-    Size size = Utils(context).getScreenSize;
+    final productId = ModalRoute.of(context)!.settings.arguments as String;
+
+    final productsProviders = Provider.of<ProductsProvider>(context);
+
+    final getCurrentProduct = productsProviders.findProductById(productId);
+
     final Color color = Utils(context).color;
+
+    Size size = Utils(context).getScreenSize;
+
+    double usedPrice = getCurrentProduct.isOnSale
+        ? getCurrentProduct.salePrice
+        : getCurrentProduct.price;
+
+    double totalPrice = usedPrice * int.parse(_quantityTextController.text);
 
     return Scaffold(
       appBar: AppBar(
@@ -49,7 +64,7 @@ class _ProductDetailsState extends State<ProductDetails> {
         Flexible(
           flex: 2,
           child: FancyShimmerImage(
-            imageUrl: 'https://i.ibb.co/F0s3FHQ/Apricots.png',
+            imageUrl: getCurrentProduct.imageUrl,
             boxFit: BoxFit.scaleDown,
             width: size.width,
             // height: screenHeight * .4,
@@ -75,7 +90,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                     children: [
                       Flexible(
                         child: TextWidget(
-                          text: 'Title',
+                          text: getCurrentProduct.title,
                           color: color,
                           textsize: 25,
                           isTitle: true,
@@ -92,13 +107,13 @@ class _ProductDetailsState extends State<ProductDetails> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       TextWidget(
-                        text: '\$2.59',
+                        text: '\$${usedPrice.toStringAsFixed(2)}/',
                         color: Colors.green,
                         textsize: 22,
                         isTitle: true,
                       ),
                       TextWidget(
-                        text: '/Kg',
+                        text: getCurrentProduct.isPiece ? 'Piece' : 'Kg',
                         color: color,
                         textsize: 12,
                         isTitle: false,
@@ -107,9 +122,9 @@ class _ProductDetailsState extends State<ProductDetails> {
                         width: 10,
                       ),
                       Visibility(
-                        visible: true,
+                        visible: getCurrentProduct.isOnSale ? true : false,
                         child: Text(
-                          '\$3.9',
+                          '\$${getCurrentProduct.price.toStringAsFixed(2)}',
                           style: TextStyle(
                               fontSize: 15,
                               color: color,
@@ -227,7 +242,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                               child: Row(
                                 children: [
                                   TextWidget(
-                                    text: '\$2.59/',
+                                    text: '\$${totalPrice.toStringAsFixed(2)}/',
                                     color: color,
                                     textsize: 20,
                                     isTitle: true,

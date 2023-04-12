@@ -1,6 +1,6 @@
 import 'package:desayur/inner_screens/product_details.dart';
 import 'package:desayur/models/products_model.dart';
-import 'package:desayur/services/global_methods.dart';
+// import 'package:desayur/services/global_methods.dart';
 import 'package:desayur/services/utils.dart';
 import 'package:desayur/widgets/heart_btn.dart';
 import 'package:desayur/widgets/price_widget.dart';
@@ -41,6 +41,7 @@ class _FeedsWidgetState extends State<FeedsWidget> {
     final Color color = Utils(context).color;
     // ignore: unused_local_variable
     final theme = Utils(context).getTheme;
+
     Size size = Utils(context).getScreenSize;
 
     return Padding(
@@ -50,8 +51,10 @@ class _FeedsWidgetState extends State<FeedsWidget> {
         color: Theme.of(context).cardColor,
         child: InkWell(
           onTap: () {
-            GlobalMethods.navigateTo(
-                ctx: context, routeName: ProductDetails.routeName);
+            Navigator.pushNamed(context, ProductDetails.routeName,
+                arguments: productModel.id);
+            // GlobalMethods.navigateTo(
+            //     ctx: context, routeName: ProductDetails.routeName);
           },
           borderRadius: BorderRadius.circular(12),
           child: Column(
@@ -95,7 +98,7 @@ class _FeedsWidgetState extends State<FeedsWidget> {
                         salePrice: productModel.salePrice,
                         price: productModel.price,
                         textPrice: _quantityTextController.text,
-                        isOnSale: true,
+                        isOnSale: productModel.isOnSale,
                       ),
                     ),
                     Flexible(
