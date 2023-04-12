@@ -14,6 +14,16 @@ class ProductsProvider with ChangeNotifier {
     return _productsList.firstWhere((element) => element.id == productId);
   }
 
+  List<ProductModel> findProductByCategory(String categoryName) {
+    // ignore: no_leading_underscores_for_local_identifiers
+    List<ProductModel> _categoryList = _productsList
+        .where((element) => element.productCategoryName
+            .toLowerCase()
+            .contains(categoryName.toLowerCase()))
+        .toList();
+    return _categoryList;
+  }
+
   static final List<ProductModel> _productsList = [
     ProductModel(
       id: 'Apricots',
@@ -109,7 +119,7 @@ class ProductsProvider with ChangeNotifier {
       id: 'Chinese-cabbage-wombok',
       title: 'Chinese-cabbage-wombok',
       imageUrl: 'https://i.ibb.co/7yzjHVy/Chinese-cabbage-wombok.png',
-      productCategoryName: 'Spices',
+      productCategoryName: 'Vegetables',
       price: 0.99,
       salePrice: 0.15,
       isOnSale: true,

@@ -1,3 +1,4 @@
+import 'package:desayur/inner_screens/category_screen.dart';
 import 'package:desayur/inner_screens/feeds_screen.dart';
 import 'package:desayur/inner_screens/on_sale_screen.dart';
 import 'package:desayur/inner_screens/product_details.dart';
@@ -73,6 +74,7 @@ class _MyAppState extends State<MyApp> {
               OrdersScreen.routeName: (ctx) => const OrdersScreen(),
               ViewedRecentlyScreen.routeName: (ctx) =>
                   const ViewedRecentlyScreen(),
+              CategoryScreen.routeName: (ctx) => const CategoryScreen(),
             },
           );
         },

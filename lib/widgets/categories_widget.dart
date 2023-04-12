@@ -1,3 +1,4 @@
+import 'package:desayur/inner_screens/category_screen.dart';
 import 'package:desayur/provider/dark_theme_provider.dart';
 import 'package:desayur/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
@@ -23,8 +24,8 @@ class CategoriesWidget extends StatelessWidget {
 
     return InkWell(
       onTap: () {
-        // ignore: avoid_print
-        print('Category pressed');
+        Navigator.pushNamed(context, CategoryScreen.routeName,
+            arguments: catText);
       },
       child: Container(
         // height: _screenWidth * 0.6,
