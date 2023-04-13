@@ -1,3 +1,4 @@
+import 'package:desayur/providers/cart_provider.dart';
 import 'package:desayur/providers/products_provider.dart';
 import 'package:desayur/services/utils.dart';
 import 'package:desayur/widgets/text_widget.dart';
@@ -32,9 +33,11 @@ class _ProductDetailsState extends State<ProductDetails> {
   Widget build(BuildContext context) {
     final productId = ModalRoute.of(context)!.settings.arguments as String;
 
-    final productsProviders = Provider.of<ProductsProvider>(context);
+    final productProvider = Provider.of<ProductsProvider>(context);
 
-    final getCurrentProduct = productsProviders.findProductById(productId);
+    final cartProvider = Provider.of<CartProvider>(context);
+
+    final getCurrentProduct = productProvider.findProductById(productId);
 
     final Color color = Utils(context).color;
 
@@ -45,6 +48,10 @@ class _ProductDetailsState extends State<ProductDetails> {
         : getCurrentProduct.price;
 
     double totalPrice = usedPrice * int.parse(_quantityTextController.text);
+
+    // ignore: no_leading_underscores_for_local_identifiers
+    bool? _isInCart =
+        cartProvider.getCartItems.containsKey(getCurrentProduct.id);
 
     return Scaffold(
       appBar: AppBar(
@@ -267,14 +274,23 @@ class _ProductDetailsState extends State<ProductDetails> {
                           color: Colors.green,
                           borderRadius: BorderRadius.circular(10),
                           child: InkWell(
-                            onTap: () {},
+                            onTap: _isInCart
+                                ? null
+                                : () {
+                                    cartProvider.addProductsToCart(
+                                      productId: getCurrentProduct.id,
+                                      quantity: int.parse(
+                                          _quantityTextController.text),
+                                    );
+                                  },
                             borderRadius: BorderRadius.circular(10),
                             child: Padding(
                               padding: const EdgeInsets.all(12.0),
                               child: TextWidget(
-                                  text: 'Add to cart',
-                                  color: Colors.white,
-                                  textsize: 18),
+                                text: _isInCart ? 'In cart' : 'Add to cart',
+                                color: Colors.white,
+                                textsize: 18,
+                              ),
                             ),
                           ),
                         ),

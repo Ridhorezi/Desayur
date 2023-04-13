@@ -1,5 +1,6 @@
 import 'package:desayur/inner_screens/product_details.dart';
 import 'package:desayur/models/products_model.dart';
+import 'package:desayur/providers/cart_provider.dart';
 // import 'package:desayur/services/global_methods.dart';
 import 'package:desayur/services/utils.dart';
 import 'package:desayur/widgets/heart_btn.dart';
@@ -38,11 +39,16 @@ class _FeedsWidgetState extends State<FeedsWidget> {
   Widget build(BuildContext context) {
     final productModel = Provider.of<ProductModel>(context);
 
+    final cartProvider = Provider.of<CartProvider>(context);
+
     final Color color = Utils(context).color;
     // ignore: unused_local_variable
     final theme = Utils(context).getTheme;
 
     Size size = Utils(context).getScreenSize;
+
+    // ignore: no_leading_underscores_for_local_identifiers
+    bool? _isInCart = cartProvider.getCartItems.containsKey(productModel.id);
 
     return Padding(
       padding: const EdgeInsets.all(8.0),
@@ -159,10 +165,20 @@ class _FeedsWidgetState extends State<FeedsWidget> {
               SizedBox(
                 width: double.infinity,
                 child: TextButton(
-                  onPressed: () {},
+                  onPressed: _isInCart
+                      ? null
+                      : () {
+                          // if(_isInCart) {
+                          //     return;
+                          // }
+                          cartProvider.addProductsToCart(
+                            productId: productModel.id,
+                            quantity: int.parse(_quantityTextController.text),
+                          );
+                        },
                   // ignore: sort_child_properties_last
                   child: TextWidget(
-                    text: 'Add to Cart',
+                    text: _isInCart ? 'In cart' : 'Add to Cart',
                     color: color,
                     maxLines: 1,
                     textsize: 20,
