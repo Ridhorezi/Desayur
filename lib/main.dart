@@ -2,9 +2,12 @@ import 'package:desayur/inner_screens/category_screen.dart';
 import 'package:desayur/inner_screens/feeds_screen.dart';
 import 'package:desayur/inner_screens/on_sale_screen.dart';
 import 'package:desayur/inner_screens/product_details.dart';
+
 import 'package:desayur/provider/dark_theme_provider.dart';
 import 'package:desayur/providers/cart_provider.dart';
 import 'package:desayur/providers/products_provider.dart';
+import 'package:desayur/providers/wishlist_provider.dart';
+
 import 'package:desayur/screens/auth/forget_pass.dart';
 import 'package:desayur/screens/auth/login.dart';
 import 'package:desayur/screens/auth/register.dart';
@@ -12,6 +15,7 @@ import 'package:desayur/screens/bottom_bar.dart';
 import 'package:desayur/screens/orders/orders_screen.dart';
 import 'package:desayur/screens/viewed_recently/viewed_recently.dart';
 import 'package:desayur/screens/wishlist/wishlist_screen.dart';
+
 import 'package:desayur/themes/theme_data.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -54,6 +58,9 @@ class _MyAppState extends State<MyApp> {
         ),
         ChangeNotifierProvider(
           create: (_) => CartProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => WishlistProvider(),
         ),
       ],
       child: Consumer<DarkThemeProvider>(
