@@ -6,6 +6,7 @@ import 'package:desayur/inner_screens/product_details.dart';
 import 'package:desayur/provider/dark_theme_provider.dart';
 import 'package:desayur/providers/cart_provider.dart';
 import 'package:desayur/providers/products_provider.dart';
+import 'package:desayur/providers/viewed_provider.dart';
 import 'package:desayur/providers/wishlist_provider.dart';
 
 import 'package:desayur/screens/auth/forget_pass.dart';
@@ -61,6 +62,9 @@ class _MyAppState extends State<MyApp> {
         ),
         ChangeNotifierProvider(
           create: (_) => WishlistProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => ViewedProvider(),
         ),
       ],
       child: Consumer<DarkThemeProvider>(
