@@ -1,3 +1,4 @@
+import 'package:desayur/providers/wishlist_provider.dart';
 import 'package:desayur/screens/wishlist/wishlist_widget.dart';
 import 'package:desayur/services/global_methods.dart';
 import 'package:desayur/widgets/empty_screen.dart';
@@ -7,6 +8,7 @@ import 'package:desayur/widgets/back_widget.dart';
 import 'package:desayur/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
+import 'package:provider/provider.dart';
 
 class WishlistScreen extends StatelessWidget {
   static const routeName = "/WishlistScreen";
@@ -14,15 +16,18 @@ class WishlistScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final wishlistProvider = Provider.of<WishlistProvider>(context);
+
+    final wishlistItemsList =
+        wishlistProvider.getWishlistItems.values.toList().reversed.toList();
+
     final Utils utils = Utils(context);
     // ignore: unused_local_variable
     final Color color = Utils(context).color;
     // ignore: unused_local_variable
     Size size = utils.getScreenSize;
-    // ignore: no_leading_underscores_for_local_identifiers
-    bool _isEmpty = true;
 
-    return _isEmpty
+    return wishlistItemsList.isEmpty
         ? const EmptyScreen(
             imagePath: 'assets/images/wishlist.png',
             title: 'Your wishlist is empty!',
@@ -38,7 +43,7 @@ class WishlistScreen extends StatelessWidget {
               elevation: 0,
               backgroundColor: Theme.of(context).scaffoldBackgroundColor,
               title: TextWidget(
-                text: 'Wishlist (2)',
+                text: 'Wishlist (${wishlistItemsList.length})',
                 color: color,
                 textsize: 22,
                 isTitle: true,
@@ -49,7 +54,9 @@ class WishlistScreen extends StatelessWidget {
                     GlobalMethods.warningDialog(
                         title: 'Empty your wishlist?',
                         subtitle: 'Are you sure?',
-                        fct: () {},
+                        fct: () {
+                          wishlistProvider.clearWishlist();
+                        },
                         context: context);
                   },
                   icon: Icon(
@@ -60,11 +67,15 @@ class WishlistScreen extends StatelessWidget {
               ],
             ),
             body: MasonryGridView.count(
+              itemCount: wishlistItemsList.length,
               crossAxisCount: 2,
               // mainAxisSpacing: 16,
               // crossAxisSpacing: 20,
               itemBuilder: (context, index) {
-                return const WishlistWidget();
+                return ChangeNotifierProvider.value(
+                  value: wishlistItemsList[index],
+                  child: const WishlistWidget(),
+                );
               },
             ),
           );

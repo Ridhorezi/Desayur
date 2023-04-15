@@ -1,6 +1,7 @@
 import 'package:desayur/inner_screens/product_details.dart';
 import 'package:desayur/models/products_model.dart';
 import 'package:desayur/providers/cart_provider.dart';
+import 'package:desayur/providers/wishlist_provider.dart';
 // import 'package:desayur/services/global_methods.dart';
 import 'package:desayur/services/utils.dart';
 import 'package:desayur/widgets/heart_btn.dart';
@@ -41,6 +42,8 @@ class _FeedsWidgetState extends State<FeedsWidget> {
 
     final cartProvider = Provider.of<CartProvider>(context);
 
+    final wishlistProvider = Provider.of<WishlistProvider>(context);
+
     final Color color = Utils(context).color;
     // ignore: unused_local_variable
     final theme = Utils(context).getTheme;
@@ -49,6 +52,10 @@ class _FeedsWidgetState extends State<FeedsWidget> {
 
     // ignore: no_leading_underscores_for_local_identifiers
     bool? _isInCart = cartProvider.getCartItems.containsKey(productModel.id);
+
+    // ignore: no_leading_underscores_for_local_identifiers
+    bool? _isInWishlist =
+        wishlistProvider.getWishlistItems.containsKey(productModel.id);
 
     return Padding(
       padding: const EdgeInsets.all(8.0),
@@ -86,9 +93,12 @@ class _FeedsWidgetState extends State<FeedsWidget> {
                         isTitle: true,
                       ),
                     ),
-                    const Flexible(
+                    Flexible(
                       flex: 1,
-                      child: HeartBtn(),
+                      child: HeartBtn(
+                        productId: productModel.id,
+                        isInWishlist: _isInWishlist,
+                      ),
                     ),
                   ],
                 ),

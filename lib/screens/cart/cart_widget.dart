@@ -3,6 +3,7 @@ import 'package:desayur/models/cart_model.dart';
 // import 'package:desayur/models/products_model.dart';
 import 'package:desayur/providers/cart_provider.dart';
 import 'package:desayur/providers/products_provider.dart';
+import 'package:desayur/providers/wishlist_provider.dart';
 // import 'package:desayur/services/global_methods.dart';
 import 'package:desayur/services/utils.dart';
 import 'package:desayur/widgets/heart_btn.dart';
@@ -44,12 +45,18 @@ class _CartWidgetState extends State<CartWidget> {
 
     final cartModel = Provider.of<CartModel>(context);
 
+    final wishlistProvider = Provider.of<WishlistProvider>(context);
+
     final getCurrentProduct =
         productProvider.findProductById(cartModel.productId);
 
     double usedPrice = getCurrentProduct.isOnSale
         ? getCurrentProduct.salePrice
         : getCurrentProduct.price;
+
+    // ignore: no_leading_underscores_for_local_identifiers
+    bool? _isInWishlist =
+        wishlistProvider.getWishlistItems.containsKey(getCurrentProduct.id);
 
     final Utils utils = Utils(context);
     // ignore: unused_local_variable
@@ -186,7 +193,10 @@ class _CartWidgetState extends State<CartWidget> {
                           const SizedBox(
                             height: 5,
                           ),
-                          const HeartBtn(),
+                          HeartBtn(
+                            productId: getCurrentProduct.id,
+                            isInWishlist: _isInWishlist,
+                          ),
                           TextWidget(
                             text: '\$${usedPrice.toStringAsFixed(2)}',
                             color: color,

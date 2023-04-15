@@ -9,8 +9,8 @@ class WishlistProvider with ChangeNotifier {
     return _wishlistItems;
   }
 
-  //! add product item to wishlist
-  void addProductToWishlist({required String productId}) {
+  //! add or remove product item wishlist
+  void addRemoveProductToWishlist({required String productId}) {
     if (_wishlistItems.containsKey(productId)) {
       removeOneItem(productId);
     } else {
@@ -22,6 +22,7 @@ class WishlistProvider with ChangeNotifier {
         ),
       );
     }
+    notifyListeners();
   }
 
   //! remove one wishlist

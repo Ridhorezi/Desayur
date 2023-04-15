@@ -1,5 +1,6 @@
 import 'package:desayur/providers/cart_provider.dart';
 import 'package:desayur/providers/products_provider.dart';
+import 'package:desayur/providers/wishlist_provider.dart';
 import 'package:desayur/services/utils.dart';
 import 'package:desayur/widgets/text_widget.dart';
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
@@ -39,6 +40,8 @@ class _ProductDetailsState extends State<ProductDetails> {
 
     final getCurrentProduct = productProvider.findProductById(productId);
 
+    final wishlistProvider = Provider.of<WishlistProvider>(context);
+
     final Color color = Utils(context).color;
 
     Size size = Utils(context).getScreenSize;
@@ -52,6 +55,10 @@ class _ProductDetailsState extends State<ProductDetails> {
     // ignore: no_leading_underscores_for_local_identifiers
     bool? _isInCart =
         cartProvider.getCartItems.containsKey(getCurrentProduct.id);
+
+    // ignore: no_leading_underscores_for_local_identifiers
+    bool? _isInWishlist =
+        wishlistProvider.getWishlistItems.containsKey(getCurrentProduct.id);
 
     return Scaffold(
       appBar: AppBar(
@@ -103,7 +110,10 @@ class _ProductDetailsState extends State<ProductDetails> {
                           isTitle: true,
                         ),
                       ),
-                      const HeartBtn()
+                      HeartBtn(
+                        productId: getCurrentProduct.id,
+                        isInWishlist: _isInWishlist,
+                      ),
                     ],
                   ),
                 ),
