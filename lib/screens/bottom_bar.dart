@@ -1,4 +1,5 @@
 import 'package:desayur/provider/dark_theme_provider.dart';
+import 'package:desayur/providers/cart_provider.dart';
 import 'package:desayur/screens/cart/cart_screen.dart';
 import 'package:desayur/screens/categories.dart';
 import 'package:desayur/screens/home_screen.dart';
@@ -34,6 +35,7 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
   @override
   Widget build(BuildContext context) {
     final themeState = Provider.of<DarkThemeProvider>(context);
+    
     // ignore: no_leading_underscores_for_local_identifiers
     bool _isDark = themeState.getDarkTheme;
 
@@ -64,19 +66,23 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
             label: "Categories",
           ),
           BottomNavigationBarItem(
-            icon: badges.Badge(
-              badgeAnimation: const badges.BadgeAnimation.slide(),
-              badgeStyle: badges.BadgeStyle(
-                shape: badges.BadgeShape.circle,
-                badgeColor: Colors.blue,
-                borderRadius: BorderRadius.circular(8),
-              ),
-              position: badges.BadgePosition.topEnd(top: -10, end: -9),
-              badgeContent: FittedBox(
+            icon: Consumer<CartProvider>(
+              builder: (_, myCart, ch) {
+                return badges.Badge(
+                  badgeAnimation: const badges.BadgeAnimation.slide(),
+                  badgeStyle: badges.BadgeStyle(
+                    shape: badges.BadgeShape.circle,
+                    badgeColor: Colors.blue,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  position: badges.BadgePosition.topEnd(top: -10, end: -9),
+                  badgeContent: FittedBox(
+                      child:
+                          TextWidget(text: myCart.getCartItems.length.toString(), color: Colors.white, textsize: 14)),
                   child:
-                      TextWidget(text: '1', color: Colors.white, textsize: 14)),
-              child:
-                  Icon(_selectedIndex == 2 ? IconlyBold.buy : IconlyLight.buy),
+                      Icon(_selectedIndex == 2 ? IconlyBold.buy : IconlyLight.buy),
+                );
+              }
             ),
             label: "Cart",
           ),
