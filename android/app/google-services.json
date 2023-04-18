@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1002163324749",
+    "project_id": "desayur-b1908",
+    "storage_bucket": "desayur-b1908.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1002163324749:android:f0c8c8daeaeecc37b99904",
+        "android_client_info": {
+          "package_name": "com.example.desayur"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1002163324749-sfvlnmup5k5u62lctkb500rp2ujm562v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.desayur",
+            "certificate_hash": "0022f4e0531e3abb488fd4148c09b5f720755074"
+          }
+        },
+        {
+          "client_id": "1002163324749-g8fftlv1632van7hkleptkod5jr53uam.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyATR9EsgisPbyS0TGknevEKO0qN5PCFRys"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1002163324749-g8fftlv1632van7hkleptkod5jr53uam.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
