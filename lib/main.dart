@@ -17,8 +17,9 @@ import 'package:desayur/screens/orders/orders_screen.dart';
 import 'package:desayur/screens/viewed_recently/viewed_recently.dart';
 import 'package:desayur/screens/wishlist/wishlist_screen.dart';
 
-import 'package:desayur/themes/theme_data.dart';
 import 'package:firebase_core/firebase_core.dart';
+
+import 'package:desayur/themes/theme_data.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -96,8 +97,8 @@ class _MyAppState extends State<MyApp> {
                 debugShowCheckedModeBanner: false,
                 title: 'Desayur',
                 theme: Styles.themeData(themeProvider.getDarkTheme, context),
-                home: const BottomBarScreen(),
-                // home: const LoginScreen(),
+                // home: const BottomBarScreen(),
+                home: const LoginScreen(),
                 routes: {
                   //! Auth route
                   LoginScreen.routeName: (ctx) => const LoginScreen(),

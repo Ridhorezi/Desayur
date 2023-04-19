@@ -1,7 +1,9 @@
 import 'package:card_swiper/card_swiper.dart';
+import 'package:desayur/consts/firebase_consts.dart';
 import 'package:desayur/screens/auth/forget_pass.dart';
 import 'package:desayur/screens/auth/login.dart';
 import 'package:desayur/services/global_methods.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -40,6 +42,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   bool _obscureText = true;
 
+  // ignore: unused_field
+  bool _isLoading = false;
+
   @override
   void dispose() {
     _fullNameController.dispose();
@@ -57,8 +62,35 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
     FocusScope.of(context).unfocus();
 
+    setState(() {
+      _isLoading = true;
+    });
+
     if (isValid) {
       _formKey.currentState!.save();
+      try {
+        await authInstance.createUserWithEmailAndPassword(
+          email: _emailTextController.text.toLowerCase().trim(),
+          password: _passTextController.text.trim(),
+        );
+        // ignore: avoid_print
+        print('Successfuly registered');
+      } on FirebaseException catch (error) {
+        GlobalMethods.errorDialog(
+            subtitle: '${error.message}', context: context);
+        setState(() {
+          _isLoading = false;
+        });
+      } catch (error) {
+        GlobalMethods.errorDialog(subtitle: '$error', context: context);
+        setState(() {
+          _isLoading = false;
+        });
+      } finally {
+        setState(() {
+          _isLoading = false;
+        });
+      }
     }
   }
 
@@ -298,12 +330,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                   ),
                 ),
-                AuthButton(
-                  buttonText: 'Sign up',
-                  fct: () {
-                    _submitFormOnRegister();
-                  },
-                ),
+                _isLoading
+                    ? const CircularProgressIndicator()
+                    : AuthButton(
+                        buttonText: 'Sign up',
+                        fct: () {
+                          _submitFormOnRegister();
+                        },
+                      ),
                 const SizedBox(
                   height: 10,
                 ),
