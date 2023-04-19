@@ -1,9 +1,11 @@
+import 'package:desayur/consts/firebase_consts.dart';
 import 'package:desayur/inner_screens/product_details.dart';
 import 'package:desayur/models/viewed_model.dart';
 import 'package:desayur/providers/cart_provider.dart';
 import 'package:desayur/providers/products_provider.dart';
 // import 'package:desayur/providers/viewed_provider.dart';
 import 'package:desayur/services/global_methods.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 // import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
@@ -48,8 +50,8 @@ class _ViewedRecentlyWidgetState extends State<ViewedRecentlyWidget> {
       padding: const EdgeInsets.all(8.0),
       child: GestureDetector(
         onTap: () {
-          GlobalMethods.navigateTo(
-              ctx: context, routeName: ProductDetails.routeName);
+          // GlobalMethods.navigateTo(
+          //     ctx: context, routeName: ProductDetails.routeName);
         },
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -94,6 +96,13 @@ class _ViewedRecentlyWidgetState extends State<ViewedRecentlyWidget> {
                   onTap: _isInCart
                       ? null
                       : () {
+                          final User? user = authInstance.currentUser;
+                          if (user == null) {
+                            GlobalMethods.errorDialog(
+                                subtitle: 'No user found, please login first',
+                                context: context);
+                            return;
+                          }
                           cartProvider.addProductsToCart(
                             productId: getCurrentProduct.id,
                             quantity: 1,

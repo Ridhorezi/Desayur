@@ -1,10 +1,13 @@
+import 'package:desayur/consts/firebase_consts.dart';
 import 'package:desayur/providers/cart_provider.dart';
 import 'package:desayur/providers/products_provider.dart';
 import 'package:desayur/providers/viewed_provider.dart';
 import 'package:desayur/providers/wishlist_provider.dart';
+import 'package:desayur/services/global_methods.dart';
 import 'package:desayur/services/utils.dart';
 import 'package:desayur/widgets/text_widget.dart';
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
@@ -298,6 +301,15 @@ class _ProductDetailsState extends State<ProductDetails> {
                               onTap: _isInCart
                                   ? null
                                   : () {
+                                      final User? user =
+                                          authInstance.currentUser;
+                                      if (user == null) {
+                                        GlobalMethods.errorDialog(
+                                            subtitle:
+                                                'No user found, please login first',
+                                            context: context);
+                                        return;
+                                      }
                                       cartProvider.addProductsToCart(
                                         productId: getCurrentProduct.id,
                                         quantity: int.parse(

@@ -1,3 +1,4 @@
+import 'package:desayur/consts/firebase_consts.dart';
 import 'package:desayur/provider/dark_theme_provider.dart';
 import 'package:desayur/screens/orders/orders_screen.dart';
 import 'package:desayur/screens/viewed_recently/viewed_recently.dart';
@@ -153,7 +154,9 @@ class _UserScreenState extends State<UserScreen> {
                     GlobalMethods.warningDialog(
                         title: 'Sign Out',
                         subtitle: 'Do you wanna sign out ?',
-                        fct: () {},
+                        fct: () {
+                          authInstance.signOut();
+                        },
                         context: context);
                   },
                   color: color,

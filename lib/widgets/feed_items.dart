@@ -1,13 +1,16 @@
+import 'package:desayur/consts/firebase_consts.dart';
 import 'package:desayur/inner_screens/product_details.dart';
 import 'package:desayur/models/products_model.dart';
 import 'package:desayur/providers/cart_provider.dart';
 import 'package:desayur/providers/wishlist_provider.dart';
+import 'package:desayur/services/global_methods.dart';
 // import 'package:desayur/services/global_methods.dart';
 import 'package:desayur/services/utils.dart';
 import 'package:desayur/widgets/heart_btn.dart';
 import 'package:desayur/widgets/price_widget.dart';
 import 'package:desayur/widgets/text_widget.dart';
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -181,6 +184,13 @@ class _FeedsWidgetState extends State<FeedsWidget> {
                           // if(_isInCart) {
                           //     return;
                           // }
+                          final User? user = authInstance.currentUser;
+                          if (user == null) {
+                            GlobalMethods.errorDialog(
+                                subtitle: 'No user found, please login first',
+                                context: context);
+                            return;
+                          }
                           cartProvider.addProductsToCart(
                             productId: productModel.id,
                             quantity: int.parse(_quantityTextController.text),

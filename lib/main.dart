@@ -97,8 +97,8 @@ class _MyAppState extends State<MyApp> {
                 debugShowCheckedModeBanner: false,
                 title: 'Desayur',
                 theme: Styles.themeData(themeProvider.getDarkTheme, context),
-                // home: const BottomBarScreen(),
-                home: const LoginScreen(),
+                home: const BottomBarScreen(),
+                // home: const LoginScreen(),
                 routes: {
                   //! Auth route
                   LoginScreen.routeName: (ctx) => const LoginScreen(),
