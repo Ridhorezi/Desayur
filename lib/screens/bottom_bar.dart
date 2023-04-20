@@ -11,6 +11,7 @@ import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:provider/provider.dart';
 
 class BottomBarScreen extends StatefulWidget {
+  static const routeName = '/BottomBarScreen';
   const BottomBarScreen({super.key});
 
   @override
@@ -35,7 +36,7 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
   @override
   Widget build(BuildContext context) {
     final themeState = Provider.of<DarkThemeProvider>(context);
-    
+
     // ignore: no_leading_underscores_for_local_identifiers
     bool _isDark = themeState.getDarkTheme;
 
@@ -66,24 +67,24 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
             label: "Categories",
           ),
           BottomNavigationBarItem(
-            icon: Consumer<CartProvider>(
-              builder: (_, myCart, ch) {
-                return badges.Badge(
-                  badgeAnimation: const badges.BadgeAnimation.slide(),
-                  badgeStyle: badges.BadgeStyle(
-                    shape: badges.BadgeShape.circle,
-                    badgeColor: Colors.blue,
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  position: badges.BadgePosition.topEnd(top: -10, end: -9),
-                  badgeContent: FittedBox(
-                      child:
-                          TextWidget(text: myCart.getCartItems.length.toString(), color: Colors.white, textsize: 14)),
-                  child:
-                      Icon(_selectedIndex == 2 ? IconlyBold.buy : IconlyLight.buy),
-                );
-              }
-            ),
+            icon: Consumer<CartProvider>(builder: (_, myCart, ch) {
+              return badges.Badge(
+                badgeAnimation: const badges.BadgeAnimation.slide(),
+                badgeStyle: badges.BadgeStyle(
+                  shape: badges.BadgeShape.circle,
+                  badgeColor: Colors.blue,
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                position: badges.BadgePosition.topEnd(top: -10, end: -9),
+                badgeContent: FittedBox(
+                    child: TextWidget(
+                        text: myCart.getCartItems.length.toString(),
+                        color: Colors.white,
+                        textsize: 14)),
+                child: Icon(
+                    _selectedIndex == 2 ? IconlyBold.buy : IconlyLight.buy),
+              );
+            }),
             label: "Cart",
           ),
           BottomNavigationBarItem(
