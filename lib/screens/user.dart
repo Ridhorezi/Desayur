@@ -1,5 +1,6 @@
 import 'package:desayur/consts/firebase_consts.dart';
 import 'package:desayur/provider/dark_theme_provider.dart';
+import 'package:desayur/screens/auth/forget_pass.dart';
 import 'package:desayur/screens/auth/login.dart';
 import 'package:desayur/screens/orders/orders_screen.dart';
 import 'package:desayur/screens/viewed_recently/viewed_recently.dart';
@@ -131,7 +132,13 @@ class _UserScreenState extends State<UserScreen> {
                 _listTiles(
                   title: 'Forgot Password',
                   icon: IconlyLight.unlock,
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => const ForgetPasswordScreen(),
+                      ),
+                    );
+                  },
                   color: color,
                 ),
                 SwitchListTile(
