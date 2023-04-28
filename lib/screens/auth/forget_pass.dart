@@ -10,6 +10,7 @@ import 'package:desayur/widgets/back_widget.dart';
 import 'package:desayur/consts/consts.dart';
 import 'package:desayur/widgets/auth_button.dart';
 import 'package:desayur/widgets/text_widget.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class ForgetPasswordScreen extends StatefulWidget {
   static const routeName = '/ForgetPasswordScreen';
@@ -46,6 +47,15 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
       try {
         await authInstance.sendPasswordResetEmail(
             email: _emailTextController.text.toLowerCase());
+        Fluttertoast.showToast(
+          msg: "An email has been sent to your email address",
+          toastLength: Toast.LENGTH_LONG,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIosWeb: 2,
+          backgroundColor: Colors.grey.shade600,
+          textColor: Colors.white,
+          fontSize: 16.0,
+        );
       } on FirebaseException catch (error) {
         GlobalMethods.errorDialog(
             subtitle: '${error.message}', context: context);
