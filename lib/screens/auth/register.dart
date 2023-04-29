@@ -1,11 +1,12 @@
 import 'package:card_swiper/card_swiper.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:desayur/consts/firebase_consts.dart';
 import 'package:desayur/screens/auth/forget_pass.dart';
 import 'package:desayur/screens/auth/login.dart';
 import 'package:desayur/screens/bottom_bar.dart';
 import 'package:desayur/screens/loading_manager.dart';
 import 'package:desayur/services/global_methods.dart';
-import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -75,6 +76,21 @@ class _RegisterScreenState extends State<RegisterScreen> {
           email: _emailTextController.text.toLowerCase().trim(),
           password: _passTextController.text.trim(),
         );
+
+        final User? user = authInstance.currentUser;
+
+        // ignore: no_leading_underscores_for_local_identifiers
+        final _uid = user!.uid;
+
+        await FirebaseFirestore.instance.collection('users').doc(_uid).set({
+          'id': _uid,
+          'name': _fullNameController.text,
+          'email': _emailTextController.text,
+          'shipping-address': _addressTextController.text,
+          'userWish': [],
+          'userCart': [],
+          'createdAt': Timestamp.now(),
+        });
         // ignore: use_build_context_synchronously
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
