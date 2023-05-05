@@ -2,6 +2,7 @@ import 'package:desayur/models/products_model.dart';
 import 'package:desayur/providers/products_provider.dart';
 import 'package:desayur/services/utils.dart';
 import 'package:desayur/widgets/back_widget.dart';
+import 'package:desayur/widgets/empty_products_widget.dart';
 import 'package:desayur/widgets/feed_items.dart';
 import 'package:desayur/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +21,8 @@ class _FeedsScreenState extends State<FeedsScreen> {
   final TextEditingController? _searchTextController = TextEditingController();
 
   final FocusNode _searchTextFocusNode = FocusNode();
+  // ignore: unused_local_variable
+  List<ProductModel> listAllProductSearch = [];
 
   @override
   void dispose() {
@@ -28,13 +31,13 @@ class _FeedsScreenState extends State<FeedsScreen> {
     super.dispose();
   }
 
-  // @override
-  // void initState() {
-  //   final productsProvider =
-  //       Provider.of<ProductsProvider>(context, listen: false);
-  //   productsProvider.fetchProducts();
-  //   super.initState();
-  // }
+  @override
+  void initState() {
+    final productsProvider =
+        Provider.of<ProductsProvider>(context, listen: false);
+    productsProvider.fetchProducts();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +77,12 @@ class _FeedsScreenState extends State<FeedsScreen> {
                   focusNode: _searchTextFocusNode,
                   controller: _searchTextController,
                   onChanged: (value) {
-                    setState(() {});
+                    setState(
+                      () {
+                        listAllProductSearch =
+                            productsProviders.searchQuery(value);
+                      },
+                    );
                   },
                   decoration: InputDecoration(
                     focusedBorder: OutlineInputBorder(
@@ -104,23 +112,31 @@ class _FeedsScreenState extends State<FeedsScreen> {
                 ),
               ),
             ),
-            GridView.count(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              crossAxisCount: 2,
-              padding: EdgeInsets.zero,
-              // crossAxisSpacing: 10,
-              childAspectRatio: size.width / (size.height * 0.59),
-              children: List.generate(
-                allProducts.length,
-                (index) {
-                  return ChangeNotifierProvider.value(
-                    value: allProducts[index],
-                    child: const FeedsWidget(),
-                  );
-                },
-              ),
-            ),
+            _searchTextController!.text.isNotEmpty &&
+                    listAllProductSearch.isEmpty
+                ? const EmptyProductWidget(
+                    text: 'No prodducts found, please try another keyword')
+                : GridView.count(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    crossAxisCount: 2,
+                    padding: EdgeInsets.zero,
+                    // crossAxisSpacing: 10,
+                    childAspectRatio: size.width / (size.height * 0.59),
+                    children: List.generate(
+                      _searchTextController!.text.isNotEmpty
+                          ? listAllProductSearch.length
+                          : allProducts.length,
+                      (index) {
+                        return ChangeNotifierProvider.value(
+                          value: _searchTextController!.text.isNotEmpty
+                              ? listAllProductSearch[index]
+                              : allProducts[index],
+                          child: const FeedsWidget(),
+                        );
+                      },
+                    ),
+                  ),
           ],
         ),
       ),

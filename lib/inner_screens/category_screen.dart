@@ -21,6 +21,8 @@ class _CategoryScreenState extends State<CategoryScreen> {
   final TextEditingController? _searchTextController = TextEditingController();
 
   final FocusNode _searchTextFocusNode = FocusNode();
+  // ignore: unused_local_variable
+  List<ProductModel> listCategoryProductSearch = [];
 
   @override
   void dispose() {
@@ -74,7 +76,12 @@ class _CategoryScreenState extends State<CategoryScreen> {
                         focusNode: _searchTextFocusNode,
                         controller: _searchTextController,
                         onChanged: (value) {
-                          setState(() {});
+                          setState(
+                            () {
+                              listCategoryProductSearch =
+                                  productsProviders.searchQuery(value);
+                            },
+                          );
                         },
                         decoration: InputDecoration(
                           focusedBorder: OutlineInputBorder(
@@ -105,23 +112,32 @@ class _CategoryScreenState extends State<CategoryScreen> {
                       ),
                     ),
                   ),
-                  GridView.count(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    crossAxisCount: 2,
-                    padding: EdgeInsets.zero,
-                    // crossAxisSpacing: 10,
-                    childAspectRatio: size.width / (size.height * 0.59),
-                    children: List.generate(
-                      productByCategory.length,
-                      (index) {
-                        return ChangeNotifierProvider.value(
-                          value: productByCategory[index],
-                          child: const FeedsWidget(),
-                        );
-                      },
-                    ),
-                  ),
+                  _searchTextController!.text.isNotEmpty &&
+                          listCategoryProductSearch.isEmpty
+                      ? const EmptyProductWidget(
+                          text:
+                              'No prodducts found, please try another keyword')
+                      : GridView.count(
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          crossAxisCount: 2,
+                          padding: EdgeInsets.zero,
+                          // crossAxisSpacing: 10,
+                          childAspectRatio: size.width / (size.height * 0.59),
+                          children: List.generate(
+                            _searchTextController!.text.isNotEmpty
+                                ? listCategoryProductSearch.length
+                                : productByCategory.length,
+                            (index) {
+                              return ChangeNotifierProvider.value(
+                                value: _searchTextController!.text.isNotEmpty
+                                    ? listCategoryProductSearch[index]
+                                    : productByCategory[index],
+                                child: const FeedsWidget(),
+                              );
+                            },
+                          ),
+                        ),
                 ],
               ),
             ),
