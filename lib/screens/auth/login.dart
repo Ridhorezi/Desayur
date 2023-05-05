@@ -1,6 +1,7 @@
 import 'package:card_swiper/card_swiper.dart';
 import 'package:desayur/consts/consts.dart';
 import 'package:desayur/consts/firebase_consts.dart';
+import 'package:desayur/fetch_screen.dart';
 import 'package:desayur/screens/auth/forget_pass.dart';
 import 'package:desayur/screens/auth/register.dart';
 import 'package:desayur/screens/bottom_bar.dart';
@@ -59,7 +60,7 @@ class _LoginScreenState extends State<LoginScreen> {
         // ignore: use_build_context_synchronously
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
-            builder: (context) => const BottomBarScreen(),
+            builder: (context) => const FetchScreen(),
           ),
         );
         // ignore: avoid_print

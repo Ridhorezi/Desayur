@@ -1,3 +1,5 @@
+import 'package:desayur/fetch_screen.dart';
+
 import 'package:desayur/inner_screens/category_screen.dart';
 import 'package:desayur/inner_screens/feeds_screen.dart';
 import 'package:desayur/inner_screens/on_sale_screen.dart';
@@ -12,7 +14,6 @@ import 'package:desayur/providers/wishlist_provider.dart';
 import 'package:desayur/screens/auth/forget_pass.dart';
 import 'package:desayur/screens/auth/login.dart';
 import 'package:desayur/screens/auth/register.dart';
-import 'package:desayur/screens/bottom_bar.dart';
 import 'package:desayur/screens/orders/orders_screen.dart';
 import 'package:desayur/screens/viewed_recently/viewed_recently.dart';
 import 'package:desayur/screens/wishlist/wishlist_screen.dart';
@@ -57,6 +58,7 @@ class _MyAppState extends State<MyApp> {
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const MaterialApp(
+            debugShowCheckedModeBanner: false,
             home: Scaffold(
               body: Center(
                 child: CircularProgressIndicator(),
@@ -65,6 +67,7 @@ class _MyAppState extends State<MyApp> {
           );
         } else if (snapshot.hasError) {
           return const MaterialApp(
+            debugShowCheckedModeBanner: false,
             home: Scaffold(
               body: Center(
                 child: Text('An error occured'),
@@ -96,7 +99,7 @@ class _MyAppState extends State<MyApp> {
                 debugShowCheckedModeBanner: false,
                 title: 'Desayur',
                 theme: Styles.themeData(themeProvider.getDarkTheme, context),
-                home: const BottomBarScreen(),
+                home: const FetchScreen(),
                 // home: const LoginScreen(),
                 routes: {
                   //! Auth route
