@@ -1,9 +1,9 @@
 import 'package:card_swiper/card_swiper.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:desayur/consts/firebase_consts.dart';
+import 'package:desayur/fetch_screen.dart';
 import 'package:desayur/screens/auth/forget_pass.dart';
 import 'package:desayur/screens/auth/login.dart';
-import 'package:desayur/screens/bottom_bar.dart';
 import 'package:desayur/screens/loading_manager.dart';
 import 'package:desayur/services/global_methods.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -94,7 +94,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         // ignore: use_build_context_synchronously
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
-            builder: (context) => const BottomBarScreen(),
+            builder: (context) => const FetchScreen(),
           ),
         );
         // ignore: avoid_print

@@ -28,6 +28,14 @@ class _FeedsScreenState extends State<FeedsScreen> {
     super.dispose();
   }
 
+  // @override
+  // void initState() {
+  //   final productsProvider =
+  //       Provider.of<ProductsProvider>(context, listen: false);
+  //   productsProvider.fetchProducts();
+  //   super.initState();
+  // }
+
   @override
   Widget build(BuildContext context) {
     final productsProviders = Provider.of<ProductsProvider>(context);
