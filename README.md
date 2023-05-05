@@ -1,6 +1,6 @@
 # desayur
 
-Tugas akhir S4 mobile programing (Desayur - Grocery App) 
+Tugas akhir S4 mobile programing (Desayur - Grocery App).
 
 ## Getting Started
 
