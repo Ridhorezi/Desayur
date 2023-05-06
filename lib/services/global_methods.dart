@@ -1,5 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:desayur/consts/firebase_consts.dart';
 import 'package:desayur/widgets/text_widget.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:uuid/uuid.dart';
 
 class GlobalMethods {
   static navigateTo({required BuildContext ctx, required String routeName}) {
@@ -59,7 +64,7 @@ class GlobalMethods {
     );
   }
 
-   static Future<void> errorDialog({
+  static Future<void> errorDialog({
     required String subtitle,
     required BuildContext context,
   }) async {
@@ -95,5 +100,38 @@ class GlobalMethods {
         );
       },
     );
+  }
+
+  static Future<void> addToCart({
+    required String productId,
+    required int quantity,
+    required BuildContext context,
+  }) async {
+    final User? user = authInstance.currentUser;
+    // ignore: no_leading_underscores_for_local_identifiers
+    final _uid = user!.uid;
+    final cartId = const Uuid().v4();
+    try {
+      FirebaseFirestore.instance.collection('users').doc(_uid).update({
+        'userCart': FieldValue.arrayUnion([
+          {
+            'cartId': cartId,
+            'productId': productId,
+            'quantity': quantity,
+          }
+        ])
+      });
+      await Fluttertoast.showToast(
+        msg: "Item has been added to your cart",
+        toastLength: Toast.LENGTH_LONG,
+        gravity: ToastGravity.CENTER,
+        timeInSecForIosWeb: 2,
+        backgroundColor: Colors.grey.shade600,
+        textColor: Colors.white,
+        fontSize: 16.0,
+      );
+    } catch (error) {
+      errorDialog(subtitle: error.toString(), context: context);
+    }
   }
 }
