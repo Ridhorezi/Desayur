@@ -1,10 +1,10 @@
 import 'package:desayur/inner_screens/product_details.dart';
 import 'package:desayur/models/cart_model.dart';
-// import 'package:desayur/models/products_model.dart';
+import 'package:desayur/models/products_model.dart';
 import 'package:desayur/providers/cart_provider.dart';
 import 'package:desayur/providers/products_provider.dart';
 import 'package:desayur/providers/wishlist_provider.dart';
-// import 'package:desayur/services/global_methods.dart';
+import 'package:desayur/services/global_methods.dart';
 import 'package:desayur/services/utils.dart';
 import 'package:desayur/widgets/heart_btn.dart';
 import 'package:desayur/widgets/text_widget.dart';
@@ -198,7 +198,8 @@ class _CartWidgetState extends State<CartWidget> {
                             isInWishlist: _isInWishlist,
                           ),
                           TextWidget(
-                            text: '\$${usedPrice.toStringAsFixed(2)}',
+                            text:
+                                '\$${(usedPrice * int.parse(_quantityTextController.text)).toStringAsFixed(2)}',
                             color: color,
                             textsize: 18,
                             maxLines: 1,
