@@ -1,4 +1,5 @@
 import 'package:desayur/providers/cart_provider.dart';
+import 'package:desayur/providers/products_provider.dart';
 import 'package:desayur/screens/cart/cart_widget.dart';
 import 'package:desayur/widgets/empty_screen.dart';
 import 'package:desayur/services/global_methods.dart';
@@ -35,6 +36,7 @@ class CartScreen extends StatelessWidget {
         // ignore: dead_code
         : Scaffold(
             appBar: AppBar(
+              automaticallyImplyLeading: false,
               elevation: 0,
               backgroundColor: Theme.of(context).scaffoldBackgroundColor,
               title: TextWidget(
@@ -87,6 +89,23 @@ class CartScreen extends StatelessWidget {
     // ignore: unused_local_variable
     final Color color = Utils(ctx).color;
     // ignore: unused_local_variable
+
+    // ignore: unused_local_variable
+    double total = 0.0;
+    // ignore: unused_local_variable
+    final cartProvider = Provider.of<CartProvider>(ctx);
+    final productProvider = Provider.of<ProductsProvider>(ctx);
+    cartProvider.getCartItems.forEach(
+      (key, value) {
+        final getCurrentProduct =
+            productProvider.findProductById(value.productId);
+        total += (getCurrentProduct.isOnSale
+                ? getCurrentProduct.salePrice
+                : getCurrentProduct.price) *
+            value.quantity;
+      },
+    );
+
     Size size = utils.getScreenSize;
     return SizedBox(
       width: double.infinity,
@@ -115,7 +134,7 @@ class CartScreen extends StatelessWidget {
             const Spacer(),
             FittedBox(
               child: TextWidget(
-                text: 'Total \$0.259',
+                text: 'Total \$${total.toStringAsFixed(2)}',
                 color: color,
                 textsize: 18,
                 isTitle: true,
