@@ -31,7 +31,7 @@ class _FetchScreenState extends State<FetchScreen> {
 
       if (user == null) {
         await productsProvider.fetchProducts();
-        cartProvider.clearCart();
+        cartProvider.clearLocalCart();
       } else {
         await productsProvider.fetchProducts();
 

@@ -12,37 +12,18 @@ class CartProvider with ChangeNotifier {
     return _cartItems;
   }
 
-  //! add products to cart
-  // void addProductsToCart({
-  //   required String productId,
-  //   required int quantity,
-  // }) {
-  //   _cartItems.putIfAbsent(
-  //     productId,
-  //     () => CartModel(
-  //       id: DateTime.now().toString(),
-  //       productId: productId,
-  //       quantity: quantity,
-  //     ),
-  //   );
-  //   notifyListeners();
-  // }
-
   //! fetch data cart from firebase
-
+  final userCollection = FirebaseFirestore.instance.collection('users');
   Future<void> fetchCart() async {
     final User? user = authInstance.currentUser;
-    // ignore: no_leading_underscores_for_local_identifiers
-    String _uid = user!.uid;
-    // ignore: unused_local_variable
-    final DocumentSnapshot userDoc =
-        await FirebaseFirestore.instance.collection('users').doc(_uid).get();
-    // ignore: unnecessary_null_comparison
-    if (userDoc == null) {
+    DocumentSnapshot userDoc;
+    if (user != null) {
+      userDoc = await userCollection.doc(user.uid).get();
+    } else {
       return;
     }
-    final cartData = userDoc.get('userCart').length;
-    for (int i = 0; i < cartData; i++) {
+    final leng = userDoc.get('userCart').length;
+    for (int i = 0; i < leng; i++) {
       _cartItems.putIfAbsent(
         userDoc.get('userCart')[i]['productId'],
         () => CartModel(
@@ -52,7 +33,6 @@ class CartProvider with ChangeNotifier {
         ),
       );
     }
-
     notifyListeners();
   }
 
@@ -83,13 +63,33 @@ class CartProvider with ChangeNotifier {
   }
 
   //! remove one item at the cart
-  void removeOneItem(String productId) {
+  Future<void> removeOneItem(
+      {required String cartId,
+      required String productId,
+      required int quantity}) async {
+    final User? user = authInstance.currentUser;
+    await userCollection.doc(user!.uid).update({
+      'userCart': FieldValue.arrayRemove([
+        {'cartId': cartId, 'productId': productId, 'quantity': quantity}
+      ])
+    });
     _cartItems.remove(productId);
+    await fetchCart();
     notifyListeners();
   }
 
-  //! clear all product from cart
-  void clearCart() {
+  //! clear all product from cart live
+  Future<void> clearLiveCart() async {
+    final User? user = authInstance.currentUser;
+    await userCollection.doc(user!.uid).update({
+      'userCart': [],
+    });
+    _cartItems.clear();
+    notifyListeners();
+  }
+
+  //! clear all product from cart local
+  void clearLocalCart() {
     _cartItems.clear();
     notifyListeners();
   }

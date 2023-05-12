@@ -49,12 +49,14 @@ class CartScreen extends StatelessWidget {
                 IconButton(
                   onPressed: () {
                     GlobalMethods.warningDialog(
-                        title: 'Empty your cart?',
-                        subtitle: 'Are you sure?',
-                        fct: () {
-                          cartProvider.clearCart();
-                        },
-                        context: context);
+                      title: 'Empty your cart?',
+                      subtitle: 'Are you sure?',
+                      fct: () async {
+                        await cartProvider.clearLiveCart();
+                        cartProvider.clearLocalCart();
+                      },
+                      context: context,
+                    );
                   },
                   icon: Icon(
                     IconlyBroken.delete,
