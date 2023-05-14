@@ -2,6 +2,7 @@ import 'package:desayur/consts/consts.dart';
 import 'package:desayur/consts/firebase_consts.dart';
 import 'package:desayur/providers/cart_provider.dart';
 import 'package:desayur/providers/products_provider.dart';
+import 'package:desayur/providers/wishlist_provider.dart';
 import 'package:desayur/screens/bottom_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -27,15 +28,23 @@ class _FetchScreenState extends State<FetchScreen> {
 
       final cartProvider = Provider.of<CartProvider>(context, listen: false);
 
+      final wishlistProvider =
+          Provider.of<WishlistProvider>(context, listen: false);
+
       final User? user = authInstance.currentUser;
 
       if (user == null) {
         await productsProvider.fetchProducts();
+
         cartProvider.clearLocalCart();
+
+        wishlistProvider.clearLocalWishlist();
       } else {
         await productsProvider.fetchProducts();
 
         await cartProvider.fetchCart();
+
+        await wishlistProvider.fetchWishlist();
       }
 
       await productsProvider.fetchProducts();
