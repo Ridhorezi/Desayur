@@ -1,4 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:desayur/consts/firebase_consts.dart';
 import 'package:desayur/models/wishlist_model.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class WishlistProvider with ChangeNotifier {
@@ -9,30 +12,57 @@ class WishlistProvider with ChangeNotifier {
     return _wishlistItems;
   }
 
-  //! add or remove product item wishlist
-  void addRemoveProductToWishlist({required String productId}) {
-    if (_wishlistItems.containsKey(productId)) {
-      removeOneItem(productId);
+  //! fetch data wishlist from firebase
+  final userCollection = FirebaseFirestore.instance.collection('users');
+  Future<void> fetchWishlist() async {
+    final User? user = authInstance.currentUser;
+    DocumentSnapshot userDoc;
+    if (user != null) {
+      userDoc = await userCollection.doc(user.uid).get();
     } else {
+      return;
+    }
+    final leng = userDoc.get('userWish').length;
+    for (int i = 0; i < leng; i++) {
       _wishlistItems.putIfAbsent(
-        productId,
+        userDoc.get('userWish')[i]['productId'],
         () => WishlistModel(
-          id: DateTime.now().toString(),
-          productId: productId,
+          id: userDoc.get('userWish')[i]['wishlistId'],
+          productId: userDoc.get('userWish')[i]['productId'],
         ),
       );
     }
     notifyListeners();
   }
 
-  //! remove one wishlist
-  void removeOneItem(String productId) {
+  //! remove one item at the wishlist
+  Future<void> removeOneItem({
+    required String wishlistId,
+    required String productId,
+  }) async {
+    final User? user = authInstance.currentUser;
+    await userCollection.doc(user!.uid).update({
+      'userCart': FieldValue.arrayRemove([
+        {'wishlistId': wishlistId, 'productId': productId}
+      ])
+    });
     _wishlistItems.remove(productId);
+    await fetchWishlist();
     notifyListeners();
   }
 
-  //! clear all wishlist
-  void clearWishlist() {
+  //! clear all wishlist live
+  Future<void> clearLiveWishlist() async {
+    final User? user = authInstance.currentUser;
+    await userCollection.doc(user!.uid).update({
+      'userWish': [],
+    });
+    _wishlistItems.clear();
+    notifyListeners();
+  }
+
+  //! clear all wishlist local
+  void clearLocalWishlist() {
     _wishlistItems.clear();
     notifyListeners();
   }

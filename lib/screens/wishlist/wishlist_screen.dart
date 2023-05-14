@@ -52,12 +52,14 @@ class WishlistScreen extends StatelessWidget {
                 IconButton(
                   onPressed: () {
                     GlobalMethods.warningDialog(
-                        title: 'Empty your wishlist?',
-                        subtitle: 'Are you sure?',
-                        fct: () {
-                          wishlistProvider.clearWishlist();
-                        },
-                        context: context);
+                      title: 'Empty your wishlist?',
+                      subtitle: 'Are you sure?',
+                      fct: () async {
+                        await wishlistProvider.clearLiveWishlist();
+                        wishlistProvider.clearLocalWishlist();
+                      },
+                      context: context,
+                    );
                   },
                   icon: Icon(
                     IconlyBroken.delete,

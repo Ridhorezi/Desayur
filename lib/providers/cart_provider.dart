@@ -63,10 +63,11 @@ class CartProvider with ChangeNotifier {
   }
 
   //! remove one item at the cart
-  Future<void> removeOneItem(
-      {required String cartId,
-      required String productId,
-      required int quantity}) async {
+  Future<void> removeOneItem({
+    required String cartId,
+    required String productId,
+    required int quantity,
+  }) async {
     final User? user = authInstance.currentUser;
     await userCollection.doc(user!.uid).update({
       'userCart': FieldValue.arrayRemove([
