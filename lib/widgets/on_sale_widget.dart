@@ -4,7 +4,6 @@ import 'package:desayur/models/products_model.dart';
 import 'package:desayur/providers/cart_provider.dart';
 import 'package:desayur/providers/wishlist_provider.dart';
 import 'package:desayur/services/global_methods.dart';
-// import 'package:desayur/services/global_methods.dart';
 import 'package:desayur/services/utils.dart';
 import 'package:desayur/widgets/heart_btn.dart';
 import 'package:desayur/widgets/price_widget.dart';
@@ -104,10 +103,6 @@ class _OnSaleWidgetState extends State<OnSaleWidget> {
                                         context: context,
                                       );
                                       await cartProvider.fetchCart();
-                                      // cartProvider.addProductsToCart(
-                                      //   productId: productModel.id,
-                                      //   quantity: 1,
-                                      // );
                                     },
                               child: Icon(
                                 _isInCart ? IconlyBold.bag2 : IconlyLight.bag2,

@@ -1,5 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:desayur/consts/firebase_consts.dart';
-import 'package:desayur/screens/bottom_bar.dart';
+import 'package:desayur/fetch_screen.dart';
 import 'package:desayur/services/global_methods.dart';
 import 'package:desayur/widgets/text_widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -17,23 +18,36 @@ class GoogleButton extends StatelessWidget {
       final googleAuth = await googleAccount.authentication;
       if (googleAuth.accessToken != null && googleAuth.idToken != null) {
         try {
-          await authInstance.signInWithCredential(
+          final authResult = await authInstance.signInWithCredential(
             GoogleAuthProvider.credential(
               idToken: googleAuth.idToken,
               accessToken: googleAuth.accessToken,
             ),
           );
+          if (authResult.additionalUserInfo!.isNewUser) {
+            await FirebaseFirestore.instance
+                .collection('users')
+                .doc(authResult.user!.uid)
+                .set({
+              'id': authResult.user!.uid,
+              'name': authResult.user!.displayName,
+              'email': authResult.user!.email,
+              'shipping-address': '',
+              'userWish': [],
+              'userCart': [],
+              'createdAt': Timestamp.now(),
+            });
+          }
           Navigator.of(context).pushReplacement(
             MaterialPageRoute(
-              builder: (context) => const BottomBarScreen(),
+              builder: (context) => const FetchScreen(),
             ),
           );
         } on FirebaseException catch (error) {
           GlobalMethods.errorDialog(
-            subtitle: '${error.message}', context: context);
+              subtitle: '${error.message}', context: context);
         } catch (error) {
-          GlobalMethods.errorDialog(
-            subtitle: '$error', context: context);
+          GlobalMethods.errorDialog(subtitle: '$error', context: context);
         } finally {}
       }
     }

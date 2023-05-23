@@ -12,10 +12,10 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 
-import '../../consts/consts.dart';
-import '../../services/utils.dart';
-import '../../widgets/auth_button.dart';
-import '../../widgets/text_widget.dart';
+import 'package:desayur/consts/consts.dart';
+import 'package:desayur/services/utils.dart';
+import 'package:desayur/widgets/auth_button.dart';
+import 'package:desayur/widgets/text_widget.dart';
 
 class RegisterScreen extends StatefulWidget {
   static const routeName = '/RegisterScreen';
@@ -65,12 +65,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
     FocusScope.of(context).unfocus();
 
-    setState(() {
-      _isLoading = true;
-    });
-
     if (isValid) {
       _formKey.currentState!.save();
+
+      setState(() {
+        _isLoading = true;
+      });
+
       try {
         await authInstance.createUserWithEmailAndPassword(
           email: _emailTextController.text.toLowerCase().trim(),
@@ -81,6 +82,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
         // ignore: no_leading_underscores_for_local_identifiers
         final _uid = user!.uid;
+
+        user.updateDisplayName(_fullNameController.text);
+
+        user.reload();
 
         await FirebaseFirestore.instance.collection('users').doc(_uid).set({
           'id': _uid,

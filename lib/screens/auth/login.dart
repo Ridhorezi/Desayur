@@ -4,7 +4,6 @@ import 'package:desayur/consts/firebase_consts.dart';
 import 'package:desayur/fetch_screen.dart';
 import 'package:desayur/screens/auth/forget_pass.dart';
 import 'package:desayur/screens/auth/register.dart';
-// import 'package:desayur/screens/bottom_bar.dart';
 import 'package:desayur/screens/loading_manager.dart';
 import 'package:desayur/services/global_methods.dart';
 import 'package:desayur/widgets/auth_button.dart';

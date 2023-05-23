@@ -42,7 +42,7 @@ class WishlistProvider with ChangeNotifier {
   }) async {
     final User? user = authInstance.currentUser;
     await userCollection.doc(user!.uid).update({
-      'userCart': FieldValue.arrayRemove([
+      'userWish': FieldValue.arrayRemove([
         {'wishlistId': wishlistId, 'productId': productId}
       ])
     });

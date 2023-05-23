@@ -1,12 +1,11 @@
-import 'package:desayur/fetch_screen.dart';
-
 import 'package:desayur/inner_screens/category_screen.dart';
 import 'package:desayur/inner_screens/feeds_screen.dart';
 import 'package:desayur/inner_screens/on_sale_screen.dart';
 import 'package:desayur/inner_screens/product_details.dart';
 
-import 'package:desayur/provider/dark_theme_provider.dart';
+import 'package:desayur/providers/dark_theme_provider.dart';
 import 'package:desayur/providers/cart_provider.dart';
+import 'package:desayur/providers/orders_provider.dart';
 import 'package:desayur/providers/products_provider.dart';
 import 'package:desayur/providers/viewed_provider.dart';
 import 'package:desayur/providers/wishlist_provider.dart';
@@ -22,6 +21,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:desayur/themes/theme_data.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:desayur/fetch_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -91,6 +91,9 @@ class _MyAppState extends State<MyApp> {
             ),
             ChangeNotifierProvider(
               create: (_) => ViewedProvider(),
+            ),
+            ChangeNotifierProvider(
+              create: (_) => OrdersProvider(),
             ),
           ],
           child: Consumer<DarkThemeProvider>(

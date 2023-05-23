@@ -2,7 +2,6 @@ import 'package:desayur/inner_screens/product_details.dart';
 import 'package:desayur/models/wishlist_model.dart';
 import 'package:desayur/providers/products_provider.dart';
 import 'package:desayur/providers/wishlist_provider.dart';
-// import 'package:desayur/services/global_methods.dart';
 import 'package:desayur/services/utils.dart';
 import 'package:desayur/widgets/heart_btn.dart';
 import 'package:desayur/widgets/text_widget.dart';
