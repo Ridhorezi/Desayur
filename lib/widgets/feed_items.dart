@@ -4,7 +4,6 @@ import 'package:desayur/models/products_model.dart';
 import 'package:desayur/providers/cart_provider.dart';
 import 'package:desayur/providers/wishlist_provider.dart';
 import 'package:desayur/services/global_methods.dart';
-// import 'package:desayur/services/global_methods.dart';
 import 'package:desayur/services/utils.dart';
 import 'package:desayur/widgets/heart_btn.dart';
 import 'package:desayur/widgets/price_widget.dart';
@@ -69,8 +68,6 @@ class _FeedsWidgetState extends State<FeedsWidget> {
           onTap: () {
             Navigator.pushNamed(context, ProductDetails.routeName,
                 arguments: productModel.id);
-            // GlobalMethods.navigateTo(
-            //     ctx: context, routeName: ProductDetails.routeName);
           },
           borderRadius: BorderRadius.circular(12),
           child: Column(
@@ -197,10 +194,6 @@ class _FeedsWidgetState extends State<FeedsWidget> {
                             context: context,
                           );
                           await cartProvider.fetchCart();
-                          // cartProvider.addProductsToCart(
-                          //   productId: productModel.id,
-                          //   quantity: int.parse(_quantityTextController.text),
-                          // );
                         },
                   // ignore: sort_child_properties_last
                   child: TextWidget(

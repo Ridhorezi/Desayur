@@ -71,8 +71,6 @@ class WishlistScreen extends StatelessWidget {
             body: MasonryGridView.count(
               itemCount: wishlistItemsList.length,
               crossAxisCount: 2,
-              // mainAxisSpacing: 16,
-              // crossAxisSpacing: 20,
               itemBuilder: (context, index) {
                 return ChangeNotifierProvider.value(
                   value: wishlistItemsList[index],

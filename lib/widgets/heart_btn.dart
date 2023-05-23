@@ -71,14 +71,13 @@ class _HeartBtnState extends State<HeartBtn> {
             loading = false;
           });
         }
-        // wishlistProvider.addRemoveProductToWishlist(productId: productId);
       },
       child: loading
           ? const Padding(
               padding: EdgeInsets.all(8.0),
               child: SizedBox(
-                height: 20,
-                width: 20,
+                height: 15,
+                width: 15,
                 child: CircularProgressIndicator(),
               ),
             )

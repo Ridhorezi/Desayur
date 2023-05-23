@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:desayur/consts/firebase_consts.dart';
-import 'package:desayur/provider/dark_theme_provider.dart';
+import 'package:desayur/providers/dark_theme_provider.dart';
 import 'package:desayur/screens/auth/forget_pass.dart';
 import 'package:desayur/screens/auth/login.dart';
 import 'package:desayur/screens/loading_manager.dart';
@@ -259,10 +259,6 @@ class _UserScreenState extends State<UserScreen> {
         return AlertDialog(
           title: const Text('Update'),
           content: TextField(
-            // onChanged: (value) {
-            //   print(
-            //       '_addressTextController.text ${_addressTextController.text}');
-            // },
             controller: _addressTextController,
             maxLines: 5,
             decoration: const InputDecoration(hintText: "Your address"),

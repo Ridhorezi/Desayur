@@ -40,11 +40,11 @@ class _ProductDetailsState extends State<ProductDetails> {
 
     final productProvider = Provider.of<ProductsProvider>(context);
 
+    final getCurrentProduct = productProvider.findProductById(productId);
+
     final cartProvider = Provider.of<CartProvider>(context);
 
     final viewedProvider = Provider.of<ViewedProvider>(context);
-
-    final getCurrentProduct = productProvider.findProductById(productId);
 
     final wishlistProvider = Provider.of<WishlistProvider>(context);
 
@@ -317,11 +317,6 @@ class _ProductDetailsState extends State<ProductDetails> {
                                         context: context,
                                       );
                                       await cartProvider.fetchCart();
-                                      // cartProvider.addProductsToCart(
-                                      //   productId: getCurrentProduct.id,
-                                      //   quantity: int.parse(
-                                      //       _quantityTextController.text),
-                                      // );
                                     },
                               borderRadius: BorderRadius.circular(10),
                               child: Padding(

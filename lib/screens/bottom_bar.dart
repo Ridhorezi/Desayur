@@ -1,4 +1,4 @@
-import 'package:desayur/provider/dark_theme_provider.dart';
+import 'package:desayur/providers/dark_theme_provider.dart';
 import 'package:desayur/providers/cart_provider.dart';
 import 'package:desayur/screens/cart/cart_screen.dart';
 import 'package:desayur/screens/categories.dart';
@@ -41,9 +41,6 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
     bool _isDark = themeState.getDarkTheme;
 
     return Scaffold(
-      // appBar: AppBar(
-      //   title: Text(_pages[_selectedIndex]['title']),
-      // ),
       body: _pages[_selectedIndex]['page'],
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: _isDark ? Theme.of(context).cardColor : Colors.white,

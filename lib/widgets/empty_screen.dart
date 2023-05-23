@@ -5,12 +5,13 @@ import 'package:desayur/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
 
 class EmptyScreen extends StatelessWidget {
-  const EmptyScreen(
-      {super.key,
-      required this.imagePath,
-      required this.title,
-      required this.subtitle,
-      required this.buttonText});
+  const EmptyScreen({
+    super.key,
+    required this.imagePath,
+    required this.title,
+    required this.subtitle,
+    required this.buttonText,
+  });
 
   final String imagePath, title, subtitle, buttonText;
 

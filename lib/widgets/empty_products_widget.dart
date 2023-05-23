@@ -1,11 +1,14 @@
-import 'package:desayur/provider/dark_theme_provider.dart';
+import 'package:desayur/providers/dark_theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class EmptyProductWidget extends StatelessWidget {
   final String text;
 
-  const EmptyProductWidget({super.key, required this.text});
+  const EmptyProductWidget({
+    super.key,
+    required this.text,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +28,7 @@ class EmptyProductWidget extends StatelessWidget {
               ),
             ),
             Text(
-              text, 
+              text,
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: color,

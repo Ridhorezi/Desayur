@@ -1,15 +1,16 @@
 import 'package:desayur/inner_screens/category_screen.dart';
-import 'package:desayur/provider/dark_theme_provider.dart';
+import 'package:desayur/providers/dark_theme_provider.dart';
 import 'package:desayur/widgets/text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class CategoriesWidget extends StatelessWidget {
-  const CategoriesWidget(
-      {super.key,
-      required this.catText,
-      required this.imgPath,
-      required this.passedColor});
+  const CategoriesWidget({
+    super.key,
+    required this.catText,
+    required this.imgPath,
+    required this.passedColor,
+  });
 
   final String catText, imgPath;
   final Color passedColor;
