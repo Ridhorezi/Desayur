@@ -2,6 +2,7 @@ import 'package:desayur/consts/firebase_consts.dart';
 import 'package:desayur/inner_screens/product_details.dart';
 import 'package:desayur/models/products_model.dart';
 import 'package:desayur/providers/cart_provider.dart';
+import 'package:desayur/providers/viewed_provider.dart';
 import 'package:desayur/providers/wishlist_provider.dart';
 import 'package:desayur/services/global_methods.dart';
 import 'package:desayur/services/utils.dart';
@@ -30,6 +31,8 @@ class _OnSaleWidgetState extends State<OnSaleWidget> {
 
     final wishlistProvider = Provider.of<WishlistProvider>(context);
 
+    final viewedProvider = Provider.of<ViewedProvider>(context);
+
     final Color color = Utils(context).color;
     // ignore: unused_local_variable
     final theme = Utils(context).getTheme;
@@ -51,6 +54,7 @@ class _OnSaleWidgetState extends State<OnSaleWidget> {
         child: InkWell(
           borderRadius: BorderRadius.circular(12),
           onTap: () {
+            viewedProvider.addProductToHistory(productId: productModel.id);
             Navigator.pushNamed(context, ProductDetails.routeName,
                 arguments: productModel.id);
             // GlobalMethods.navigateTo(

@@ -1,7 +1,7 @@
 import 'package:desayur/consts/firebase_consts.dart';
 import 'package:desayur/providers/cart_provider.dart';
 import 'package:desayur/providers/products_provider.dart';
-import 'package:desayur/providers/viewed_provider.dart';
+// import 'package:desayur/providers/viewed_provider.dart';
 import 'package:desayur/providers/wishlist_provider.dart';
 import 'package:desayur/services/global_methods.dart';
 import 'package:desayur/services/utils.dart';
@@ -44,7 +44,7 @@ class _ProductDetailsState extends State<ProductDetails> {
 
     final cartProvider = Provider.of<CartProvider>(context);
 
-    final viewedProvider = Provider.of<ViewedProvider>(context);
+    // final viewedProvider = Provider.of<ViewedProvider>(context);
 
     final wishlistProvider = Provider.of<WishlistProvider>(context);
 
@@ -68,7 +68,7 @@ class _ProductDetailsState extends State<ProductDetails> {
 
     return WillPopScope(
       onWillPop: () async {
-        viewedProvider.addProductToHistory(productId: productId);
+        // viewedProvider.addProductToHistory(productId: productId);
         return true;
       },
       child: Scaffold(
