@@ -1,7 +1,7 @@
-import 'package:desayur/inner_screens/product_details.dart';
+// import 'package:desayur/inner_screens/product_details.dart';
 import 'package:desayur/models/orders_model.dart';
 import 'package:desayur/providers/products_provider.dart';
-import 'package:desayur/services/global_methods.dart';
+// import 'package:desayur/services/global_methods.dart';
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 
@@ -44,8 +44,8 @@ class _OrderWidgetState extends State<OrderWidget> {
       subtitle:
           Text('Paid: \$${double.parse(ordersModel.price).toStringAsFixed(2)}'),
       onTap: () {
-        GlobalMethods.navigateTo(
-            ctx: context, routeName: ProductDetails.routeName);
+        // GlobalMethods.navigateTo(
+        //     ctx: context, routeName: ProductDetails.routeName);
       },
       leading: FancyShimmerImage(
         width: size.width * 0.2,
