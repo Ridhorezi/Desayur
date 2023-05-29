@@ -128,8 +128,6 @@ class CartScreen extends StatelessWidget {
               child: InkWell(
                 borderRadius: BorderRadius.circular(10),
                 onTap: () async {
-                  final orderId = const Uuid().v4();
-
                   final productProvider =
                       Provider.of<ProductsProvider>(ctx, listen: false);
 
@@ -139,6 +137,7 @@ class CartScreen extends StatelessWidget {
                     final getCurrentProduct =
                         productProvider.findProductById(value.productId);
                     try {
+                      final orderId = const Uuid().v4();
                       await FirebaseFirestore.instance
                           .collection('orders')
                           .doc(orderId)

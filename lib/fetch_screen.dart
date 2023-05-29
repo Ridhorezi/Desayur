@@ -1,6 +1,7 @@
 import 'package:desayur/consts/consts.dart';
 import 'package:desayur/consts/firebase_consts.dart';
 import 'package:desayur/providers/cart_provider.dart';
+// import 'package:desayur/providers/orders_provider.dart';
 import 'package:desayur/providers/products_provider.dart';
 import 'package:desayur/providers/wishlist_provider.dart';
 import 'package:desayur/screens/bottom_bar.dart';
@@ -31,6 +32,8 @@ class _FetchScreenState extends State<FetchScreen> {
       final wishlistProvider =
           Provider.of<WishlistProvider>(context, listen: false);
 
+      // final orderProvider = Provider.of<OrdersProvider>(context, listen: false);
+
       final User? user = authInstance.currentUser;
 
       if (user == null) {
@@ -39,6 +42,8 @@ class _FetchScreenState extends State<FetchScreen> {
         cartProvider.clearLocalCart();
 
         wishlistProvider.clearLocalWishlist();
+
+        // orderProvider.clearLocalOrders();
       } else {
         await productsProvider.fetchProducts();
 
@@ -47,9 +52,7 @@ class _FetchScreenState extends State<FetchScreen> {
         await wishlistProvider.fetchWishlist();
       }
 
-      await productsProvider.fetchProducts();
-
-      await cartProvider.fetchCart();
+      if (!mounted) return;
 
       // ignore: use_build_context_synchronously
       Navigator.of(context).pushReplacement(MaterialPageRoute(
