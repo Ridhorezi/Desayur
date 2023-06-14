@@ -115,7 +115,7 @@ class _FeedsScreenState extends State<FeedsScreen> {
             _searchTextController!.text.isNotEmpty &&
                     listAllProductSearch.isEmpty
                 ? const EmptyProductWidget(
-                    text: 'No prodducts found, please try another keyword')
+                    text: 'No products found, please try another keyword')
                 : GridView.count(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
