@@ -1,4 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:desayur/consts/firebase_consts.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:desayur/models/orders_model.dart';
 
@@ -8,9 +10,23 @@ class OrdersProvider with ChangeNotifier {
     return _orders;
   }
 
+  //! clear all orders local
+  void clearLocalOrders() {
+    _orders.clear();
+    notifyListeners();
+  }
+
   Future<void> fetchOrders() async {
+    User? user = authInstance.currentUser;
+    if (user == null) {
+      // error handling user null
+      return;
+    }
+    var uid = user.uid;
     await FirebaseFirestore.instance
         .collection('orders')
+        .where("userId", isEqualTo: uid)
+        .orderBy('orderDate', descending: false)
         .get()
         .then((QuerySnapshot ordersSnapshot) {
       _orders = [];
@@ -27,6 +43,7 @@ class OrdersProvider with ChangeNotifier {
             imageUrl: element.get('imageUrl'),
             quantity: element.get('quantity').toString(),
             orderDate: element.get('orderDate'),
+            status: element.get('status'),
           ),
         );
       });

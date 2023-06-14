@@ -115,8 +115,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                   _searchTextController!.text.isNotEmpty &&
                           listCategoryProductSearch.isEmpty
                       ? const EmptyProductWidget(
-                          text:
-                              'No prodducts found, please try another keyword')
+                          text: 'No products found, please try another keyword')
                       : GridView.count(
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),

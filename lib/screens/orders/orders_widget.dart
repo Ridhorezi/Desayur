@@ -1,13 +1,14 @@
-import 'package:desayur/inner_screens/product_details.dart';
+// import 'package:desayur/inner_screens/product_details.dart';
 import 'package:desayur/models/orders_model.dart';
 import 'package:desayur/providers/products_provider.dart';
-import 'package:desayur/services/global_methods.dart';
+// import 'package:desayur/services/global_methods.dart';
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 
 import 'package:desayur/services/utils.dart';
 import 'package:desayur/widgets/text_widget.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class OrderWidget extends StatefulWidget {
   const OrderWidget({Key? key}) : super(key: key);
@@ -41,11 +42,14 @@ class _OrderWidgetState extends State<OrderWidget> {
     Size size = Utils(context).getScreenSize;
 
     return ListTile(
-      subtitle:
-          Text('Paid: \$${double.parse(ordersModel.price).toStringAsFixed(2)}'),
-      onTap: () {
-        GlobalMethods.navigateTo(
-            ctx: context, routeName: ProductDetails.routeName);
+      subtitle: Text(
+          '${ordersModel.status}: \$${double.parse(ordersModel.price).toStringAsFixed(2)}'),
+      onTap: () async {
+        final url =
+            "https://api.whatsapp.com/send?phone=6281383538907&text=I want to make a payment on the desayur app, for product : ${getCurrentProduct.title}, Quantity : ${ordersModel.quantity}, Price : ${ordersModel.price}";
+
+        // ignore: deprecated_member_use
+        launch(url);
       },
       leading: FancyShimmerImage(
         width: size.width * 0.2,
@@ -53,7 +57,7 @@ class _OrderWidgetState extends State<OrderWidget> {
         boxFit: BoxFit.fill,
       ),
       title: TextWidget(
-        text: '${getCurrentProduct.title}}  x${ordersModel.quantity}',
+        text: '${getCurrentProduct.title}  x${ordersModel.quantity}',
         color: color,
         textsize: 18,
       ),
