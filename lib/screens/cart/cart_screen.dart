@@ -102,6 +102,7 @@ class CartScreen extends StatelessWidget {
     final cartProvider = Provider.of<CartProvider>(ctx);
     final productProvider = Provider.of<ProductsProvider>(ctx);
     final ordersProvider = Provider.of<OrdersProvider>(ctx);
+
     cartProvider.getCartItems.forEach(
       (key, value) {
         final getCurrentProduct =
@@ -114,6 +115,7 @@ class CartScreen extends StatelessWidget {
     );
 
     Size size = utils.getScreenSize;
+
     return SizedBox(
       width: double.infinity,
       height: size.height * 0.1,
@@ -154,12 +156,16 @@ class CartScreen extends StatelessWidget {
                         'imageUrl': getCurrentProduct.imageUrl,
                         'userName': user.displayName,
                         'orderDate': Timestamp.now(),
+                        'status': 'Pending',
                       });
+
                       await cartProvider.clearLiveCart();
                       cartProvider.clearLocalCart();
                       ordersProvider.fetchOrders();
+
                       await Fluttertoast.showToast(
-                        msg: "Your order has been placed",
+                        msg:
+                            "Order confirmed successfully, please open the orders page to make payment via WhatsApp!",
                         toastLength: Toast.LENGTH_LONG,
                         gravity: ToastGravity.CENTER,
                         timeInSecForIosWeb: 2,
