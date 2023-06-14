@@ -2,7 +2,6 @@ import 'package:card_swiper/card_swiper.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:desayur/consts/firebase_consts.dart';
 import 'package:desayur/fetch_screen.dart';
-import 'package:desayur/screens/auth/forget_pass.dart';
 import 'package:desayur/screens/auth/login.dart';
 import 'package:desayur/screens/loading_manager.dart';
 import 'package:desayur/services/global_methods.dart';
@@ -342,25 +341,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                   const SizedBox(
                     height: 5.0,
-                  ),
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: TextButton(
-                      onPressed: () {
-                        GlobalMethods.navigateTo(
-                            ctx: context,
-                            routeName: ForgetPasswordScreen.routeName);
-                      },
-                      child: const Text(
-                        'Forget password?',
-                        maxLines: 1,
-                        style: TextStyle(
-                            color: Colors.lightBlue,
-                            fontSize: 18,
-                            decoration: TextDecoration.underline,
-                            fontStyle: FontStyle.italic),
-                      ),
-                    ),
                   ),
                   AuthButton(
                     buttonText: 'Sign up',
